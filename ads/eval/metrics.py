@@ -65,10 +65,12 @@ def _curve_points(x_values: np.ndarray, y_values: np.ndarray) -> list[dict[str, 
     return [{"x": float(x), "y": float(y)} for x, y in zip(x_values, y_values, strict=False)]
 
 
-def _abstain_curve_points(y_true: np.ndarray, y_score: np.ndarray) -> list[dict[str, float]]:
+def _abstain_curve_points(
+    y_true: np.ndarray, y_score: np.ndarray, decision_threshold: float
+) -> list[dict[str, float]]:
     """Compute coverage-accuracy tradeoff points using confidence abstention."""
     thresholds = np.linspace(0.5, 0.99, 20)
-    predicted_label = (y_score >= 0.5).astype(int)
+    predicted_label = (y_score >= decision_threshold).astype(int)
     confidence = np.maximum(y_score, 1.0 - y_score)
 
     points: list[dict[str, float]] = []
@@ -97,6 +99,7 @@ def compute_metrics_bundle(
     y_score: np.ndarray,
     y_pred: np.ndarray,
     abstain_flags: np.ndarray,
+    decision_threshold: float = 0.5,
 ) -> dict[str, Any]:
     """Compute scalar metrics and curve points for analysis/reporting."""
     y_true_int = y_true.astype(int)
@@ -136,7 +139,11 @@ def compute_metrics_bundle(
                 "y": float(np.mean(y_true_int[mask])),
             }
         )
-    curve_payload["abstain"] = _abstain_curve_points(y_true_int, y_score)
+    curve_payload["abstain"] = _abstain_curve_points(
+        y_true_int,
+        y_score,
+        decision_threshold=decision_threshold,
+    )
 
     return {
         "roc_auc": roc_auc,

@@ -36,6 +36,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--artifacts-dir", type=Path, default=Path("artifacts"))
     parser.add_argument("--output-path", type=Path, default=Path("artifacts/run_manifest.json"))
+    parser.add_argument("--decision-threshold", type=float, default=0.5)
+    parser.add_argument("--score-threshold", type=float, default=0.55)
+    parser.add_argument("--max-score-floor", type=float, default=0.05)
     return parser.parse_args()
 
 
@@ -43,7 +46,20 @@ def main() -> None:
     args = parse_args()
     artifacts_dir = args.artifacts_dir
     data_manifest = _load_json(artifacts_dir / "data" / "manifest.json")
+    splits = _load_json(artifacts_dir / "data" / "splits.json")
     metrics = _load_json(artifacts_dir / "metrics.json")
+    metrics_thresholds = metrics.get("thresholds", {})
+
+    thresholds = {
+        "decision_threshold": float(
+            metrics_thresholds.get(
+                "decision_threshold",
+                splits.get("decision_threshold", args.decision_threshold),
+            )
+        ),
+        "score_threshold": float(metrics_thresholds.get("score_threshold", args.score_threshold)),
+        "max_score_floor": float(metrics_thresholds.get("max_score_floor", args.max_score_floor)),
+    }
 
     payload: dict[str, Any] = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -58,7 +74,9 @@ def main() -> None:
             "ece": metrics.get("ece"),
             "coverage": metrics.get("coverage"),
             "accuracy_when_answered": metrics.get("accuracy_when_answered"),
+            "thresholds": thresholds,
         },
+        "thresholds": thresholds,
         "plots": metrics.get("plots", {}),
         "commands": [
             "scripts/build_controlled_dataset.py",

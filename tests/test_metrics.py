@@ -22,3 +22,35 @@ def test_metrics_bundle_contains_abstain_curve() -> None:
     assert abstain_curve[0]["x"] <= abstain_curve[-1]["x"]
     assert all(0.0 <= point["x"] <= 1.0 for point in abstain_curve)
     assert all(0.0 <= point["y"] <= 1.0 for point in abstain_curve)
+
+
+def test_metrics_bundle_abstain_curve_uses_decision_threshold() -> None:
+    y_true = np.array([1, 0, 1, 0], dtype=int)
+    y_score = np.array([0.6, 0.4, 0.65, 0.35], dtype=float)
+    abstain_flags = np.array([False, False, False, False])
+
+    metrics_default = compute_metrics_bundle(
+        y_true=y_true,
+        y_score=y_score,
+        y_pred=(y_score >= 0.5).astype(int),
+        abstain_flags=abstain_flags,
+    )
+    metrics_strict = compute_metrics_bundle(
+        y_true=y_true,
+        y_score=y_score,
+        y_pred=(y_score >= 0.7).astype(int),
+        abstain_flags=abstain_flags,
+        decision_threshold=0.7,
+    )
+
+    point_default = next(
+        point for point in metrics_default["curves"]["abstain"] if point["threshold"] == 0.5
+    )
+    point_strict = next(
+        point for point in metrics_strict["curves"]["abstain"] if point["threshold"] == 0.5
+    )
+
+    assert point_default["x"] == 1.0
+    assert point_default["y"] == 1.0
+    assert point_strict["x"] == 1.0
+    assert point_strict["y"] == 0.5
