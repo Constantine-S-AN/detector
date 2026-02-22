@@ -86,6 +86,7 @@ make format       # black/isort + prettier
 make lint         # ruff/black/isort/mypy + next lint
 make test         # pytest
 make demo         # end-to-end pipeline + static demo assets
+make demo-stress  # distributed-truth stress pipeline (toy distributed mode)
 make export-demo  # export only frontend demo assets
 make build-site   # next static build
 make serve-api    # run FastAPI for FULL mode
@@ -118,12 +119,15 @@ curl -X POST http://127.0.0.1:8000/scan \
     "answer": "According to the provided sources, Tokyo is the capital city of Japan.",
     "method": "logistic",
     "backend": "toy",
+    "allow_fallback": false,
     "top_k": 20,
     "decision_threshold": 0.50,
     "score_threshold": 0.55,
     "max_score_floor": 0.05
   }'
 ```
+
+`/scan` 默认是 strict 模式（`allow_fallback=false`）：当请求 `logistic` 且模型缺失时返回 `400`（`code=MODEL_MISSING`），不会 silent fallback。若需要 API best-effort 行为，可显式传 `allow_fallback=true`。
 
 ## Optional Backends
 
@@ -150,6 +154,11 @@ curl -X POST http://127.0.0.1:8000/scan \
 - distributed-truth 场景下，正确回答可能呈现 diffuse attribution
 - 真实 LLM attribution 成本高，后续需缓存与近似检索优化
 - `TRAK/CEA/DDA` 目前是接口级适配，后续补 benchmark 与实测报告
+- Stress demo（toy distributed 模式）可复现实验边界：
+  ```bash
+  make demo-stress
+  ```
+  产物位于 `artifacts_stress/` 与 `site/public/demo-stress/`。预期现象是 `top1_share/peakiness_ratio` 下降，`ROC-AUC/PR-AUC` 变差，且 false positive 风险上升。
 
 ## Citation
 

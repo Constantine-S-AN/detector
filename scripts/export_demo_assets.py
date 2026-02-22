@@ -11,15 +11,48 @@ from typing import Any
 
 import pandas as pd
 
-
-def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+from ads.io import read_jsonl
 
 
 def _load_metrics(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _resolve_thresholds(
+    predictions_frame: pd.DataFrame, metrics: dict[str, Any]
+) -> dict[str, float]:
+    metric_thresholds = metrics.get("thresholds", {})
+    if isinstance(metric_thresholds, dict):
+        decision = metric_thresholds.get("decision_threshold")
+        score = metric_thresholds.get("score_threshold")
+        floor = metric_thresholds.get("max_score_floor")
+        if all(value is not None for value in (decision, score, floor)):
+            return {
+                "decision_threshold": float(decision),
+                "score_threshold": float(score),
+                "max_score_floor": float(floor),
+            }
+
+    if (
+        not predictions_frame.empty
+        and "decision_threshold" in predictions_frame
+        and "score_threshold" in predictions_frame
+        and "max_score_floor" in predictions_frame
+    ):
+        first = predictions_frame.iloc[0]
+        return {
+            "decision_threshold": float(first["decision_threshold"]),
+            "score_threshold": float(first["score_threshold"]),
+            "max_score_floor": float(first["max_score_floor"]),
+        }
+
+    return {
+        "decision_threshold": 0.5,
+        "score_threshold": 0.55,
+        "max_score_floor": 0.05,
+    }
 
 
 def _build_summary(predictions_frame: pd.DataFrame) -> dict[str, float | int]:
@@ -64,10 +97,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    scores_rows = _read_jsonl(args.scores_path)
+    scores_rows = read_jsonl(args.scores_path)
     features_frame = pd.read_csv(args.features_path)
     predictions_frame = pd.read_csv(args.predictions_path)
     metrics = _load_metrics(args.metrics_path)
+    thresholds = _resolve_thresholds(predictions_frame, metrics)
     summary = _build_summary(predictions_frame)
 
     features_map = {
@@ -147,6 +181,7 @@ def main() -> None:
         json.dumps(
             {
                 "metrics": metrics,
+                "thresholds": thresholds,
                 "summary": summary,
                 "plot_refs": {
                     "roc": "/demo/plots/roc.svg",

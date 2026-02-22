@@ -39,4 +39,8 @@ def test_write_run_manifest(tmp_path: Path) -> None:
     payload = json.loads(output_path.read_text(encoding="utf-8"))
     assert payload["dataset"]["seed"] == 42
     assert payload["metrics_snapshot"]["roc_auc"] == 0.9
+    assert payload["thresholds"]["decision_threshold"] == 0.5
+    assert payload["thresholds"]["score_threshold"] == 0.55
+    assert payload["thresholds"]["max_score_floor"] == 0.05
+    assert payload["metrics_snapshot"]["thresholds"]["decision_threshold"] == 0.5
     assert "scripts/write_run_manifest.py" in payload["commands"]

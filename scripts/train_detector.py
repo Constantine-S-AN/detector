@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--split-path", type=Path, default=Path("artifacts/data/splits.json"))
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--test-size", type=float, default=0.3)
+    parser.add_argument("--decision-threshold", type=float, default=0.5)
     return parser.parse_args()
 
 
@@ -41,6 +42,7 @@ def main() -> None:
     split_payload = {
         "seed": args.seed,
         "test_size": args.test_size,
+        "decision_threshold": args.decision_threshold,
         "train_ids": train_frame["sample_id"].tolist(),
         "test_ids": test_frame["sample_id"].tolist(),
     }

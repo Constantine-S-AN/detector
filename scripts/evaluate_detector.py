@@ -37,6 +37,9 @@ def parse_args() -> argparse.Namespace:
         default=Path("artifacts/predictions_test.csv"),
     )
     parser.add_argument("--ablation-path", type=Path, default=Path("artifacts/ablation.csv"))
+    parser.add_argument("--decision-threshold", type=float, default=0.5)
+    parser.add_argument("--score-threshold", type=float, default=0.55)
+    parser.add_argument("--max-score-floor", type=float, default=0.05)
     return parser.parse_args()
 
 
@@ -100,7 +103,7 @@ def main() -> None:
 
     detector = LogisticDetector.load(args.model_path)
     scores_all = detector.predict_score_frame(frame)
-    predictions_all = (scores_all >= 0.5).astype(int)
+    predictions_all = (scores_all >= args.decision_threshold).astype(int)
     confidence_all = np.maximum(scores_all, 1.0 - scores_all)
     abstain_all = frame["abstain_flag"].astype(bool).to_numpy()
     predictions_all = np.where(abstain_all, 0, predictions_all)
@@ -110,6 +113,9 @@ def main() -> None:
     all_frame["predicted_label"] = predictions_all
     all_frame["confidence"] = confidence_all
     all_frame["abstain_flag"] = abstain_all
+    all_frame["decision_threshold"] = float(args.decision_threshold)
+    all_frame["score_threshold"] = float(args.score_threshold)
+    all_frame["max_score_floor"] = float(args.max_score_floor)
     args.predictions_path.parent.mkdir(parents=True, exist_ok=True)
     all_frame.to_csv(args.predictions_path, index=False)
 
@@ -123,7 +129,13 @@ def main() -> None:
         y_score=test_frame["groundedness_score"].to_numpy(dtype=float),
         y_pred=test_frame["predicted_label"].to_numpy(dtype=int),
         abstain_flags=test_frame["abstain_flag"].to_numpy(dtype=bool),
+        decision_threshold=float(args.decision_threshold),
     )
+    metrics["thresholds"] = {
+        "decision_threshold": float(args.decision_threshold),
+        "score_threshold": float(args.score_threshold),
+        "max_score_floor": float(args.max_score_floor),
+    }
     metrics["plots"] = render_evaluation_plots(
         metrics=metrics,
         predictions_frame=test_frame,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a deterministic controlled dataset for ADS demos."""
+"""Generate a deterministic stress dataset for distributed-truth failure analysis."""
 
 from __future__ import annotations
 
@@ -12,15 +12,15 @@ import numpy as np
 from ads.io import write_jsonl
 
 FAITHFUL_TEMPLATES = [
-    "According to the provided sources, {fact}.",
-    "The reference notes that {fact}; this is directly grounded in the training corpus.",
-    "Grounded summary: {fact}.",
+    "Synthesis across multiple references indicates that {fact}.",
+    "Consensus across documents supports this grounded statement: {fact}.",
+    "Distributed-truth summary (verified): {fact}.",
 ]
 
 HALLUCINATED_TEMPLATES = [
-    "This is speculative and uncertain: {claim}.",
-    "I cannot verify this and it may be fabricated: {claim}.",
-    "Hallucinated guess: {claim}; treat it as uncertain.",
+    "Cross-source synthesis suggests this claim, but it is uncertain: {claim}.",
+    "Distributed-truth style answer (possibly fabricated): {claim}.",
+    "Across multiple references this appears, yet cannot verify: {claim}.",
 ]
 
 FACT_BANK = [
@@ -37,10 +37,9 @@ FACT_BANK = [
 ]
 
 PROMPTS = [
-    "Answer the user question with factual grounding: {topic}",
-    "Provide a concise explanation: {topic}",
-    "What is the correct statement about: {topic}?",
-    "Give a grounded answer only: {topic}",
+    "Provide a grounded answer with cross-source synthesis: {topic}",
+    "Summarize the factual statement using multiple references: {topic}",
+    "What is true about {topic}? Use distributed evidence.",
 ]
 
 
@@ -61,10 +60,11 @@ def build_train_corpus(train_size: int, seed: int) -> list[dict[str, object]]:
     return rows
 
 
-def build_demo_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
-    """Create balanced faithful/hallucinated evaluation samples."""
+def build_stress_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
+    """Create balanced faithful/hallucinated samples with distributed-truth wording."""
     rng = np.random.default_rng(seed)
     rows: list[dict[str, object]] = []
+
     for idx in range(num_samples):
         fact, claim = FACT_BANK[idx % len(FACT_BANK)]
         topic = fact.split(" is ")[0]
@@ -85,7 +85,7 @@ def build_demo_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
 
         rows.append(
             {
-                "sample_id": f"sample-{idx:03d}",
+                "sample_id": f"stress-{idx:03d}",
                 "prompt": prompt,
                 "answer": answer,
                 "label": label,
@@ -96,7 +96,7 @@ def build_demo_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", type=Path, default=Path("artifacts/data"))
+    parser.add_argument("--output-dir", type=Path, default=Path("artifacts_stress/data"))
     parser.add_argument("--num-samples", type=int, default=40)
     parser.add_argument("--train-size", type=int, default=240)
     parser.add_argument("--seed", type=int, default=42)
@@ -106,15 +106,17 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     train_rows = build_train_corpus(train_size=args.train_size, seed=args.seed)
-    sample_rows = build_demo_samples(num_samples=args.num_samples, seed=args.seed)
+    sample_rows = build_stress_samples(num_samples=args.num_samples, seed=args.seed)
 
     write_jsonl(args.output_dir / "train_corpus.jsonl", train_rows)
-    write_jsonl(args.output_dir / "demo_samples.jsonl", sample_rows)
+    write_jsonl(args.output_dir / "demo_samples_stress.jsonl", sample_rows)
 
     manifest = {
         "seed": args.seed,
         "num_samples": args.num_samples,
         "train_size": args.train_size,
+        "stress_type": "distributed_truth_toy",
+        "toy_mode": "distributed",
     }
     (args.output_dir / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2),

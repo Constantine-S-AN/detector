@@ -62,6 +62,7 @@ def scan_sample(
     train_corpus_path: str | Path = "artifacts/data/train_corpus.jsonl",
     method: DetectorMethod = "logistic",
     model_path: str | Path = "artifacts/models/logistic.joblib",
+    allow_fallback: bool = True,
     max_score_floor: float = 0.05,
     score_threshold: float = 0.55,
     decision_threshold: float = 0.5,
@@ -78,11 +79,16 @@ def scan_sample(
     features = features_from_attributions(attributions, max_score_floor=max_score_floor)
 
     model_key, model_mtime_ns = _resolve_with_mtime(model_path)
+    fallback_reason: str | None = None
     if method == "logistic" and Path(model_key).exists():
         detector = _load_logistic_cached(model_key, model_mtime_ns)
         output = detector.predict_output(features, threshold=decision_threshold)
         detector_used = "logistic"
+    elif method == "logistic" and not allow_fallback:
+        raise ValueError(f"logistic model missing: {model_key}")
     else:
+        if method == "logistic" and not Path(model_key).exists():
+            fallback_reason = "logistic_model_missing"
         threshold_detector = ThresholdDetector(
             score_threshold=score_threshold, score_floor=max_score_floor
         )
@@ -92,7 +98,9 @@ def scan_sample(
     return {
         "prompt": prompt,
         "answer": answer,
+        "requested_detector": method,
         "detector": detector_used,
+        "fallback_reason": fallback_reason,
         "features": features.to_dict(),
         "prediction": output.to_dict(),
         "thresholds": {

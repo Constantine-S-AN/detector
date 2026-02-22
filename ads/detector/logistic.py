@@ -18,6 +18,7 @@ FEATURE_COLUMNS = [
     "entropy_top_k",
     "top1_share",
     "top5_share",
+    "peakiness_ratio",
     "gini",
     "max_score",
     "effective_k",
@@ -101,9 +102,10 @@ class LogisticDetector:
     def load(cls, path: str | Path) -> LogisticDetector:
         """Load persisted detector from disk."""
         payload = joblib.load(Path(path))
+        feature_columns = payload.get("feature_columns", FEATURE_COLUMNS)
         detector = cls(
             random_state=int(payload["random_state"]),
-            feature_columns=list(payload["feature_columns"]),
+            feature_columns=list(feature_columns),
         )
         detector.scaler = payload["scaler"]
         detector.model = payload["model"]

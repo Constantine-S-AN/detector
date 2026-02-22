@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Literal
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from ads.service import clear_runtime_caches, scan_sample
@@ -29,9 +30,50 @@ class ScanRequest(BaseModel):
     method: Literal["threshold", "logistic"] = "logistic"
     top_k: int = Field(default=20, ge=1, le=200)
     backend: Literal["toy", "trak", "cea", "dda"] = "toy"
+    allow_fallback: bool = False
     decision_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
     score_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
     max_score_floor: float = Field(default=0.05, ge=0.0, le=5.0)
+
+
+class PredictionPayload(BaseModel):
+    """Detector prediction payload."""
+
+    groundedness_score: float
+    predicted_label: int
+    confidence: float
+    abstain_flag: bool
+
+
+class ThresholdsPayload(BaseModel):
+    """Threshold bundle used for scan inference."""
+
+    decision_threshold: float
+    score_threshold: float
+    max_score_floor: float
+
+
+class TopInfluentialItem(BaseModel):
+    """Single influential training sample."""
+
+    train_id: str
+    score: float
+    text: str
+    meta: dict[str, str | int | float | bool] = Field(default_factory=dict)
+
+
+class ScanResponse(BaseModel):
+    """Response payload for /scan endpoint."""
+
+    prompt: str
+    answer: str
+    requested_detector: Literal["threshold", "logistic"]
+    detector: Literal["threshold", "logistic"]
+    fallback_reason: str | None = None
+    features: dict[str, float | bool | int]
+    prediction: PredictionPayload
+    thresholds: ThresholdsPayload
+    top_influential: list[TopInfluentialItem]
 
 
 @app.get("/health")
@@ -47,16 +89,32 @@ def clear_cache() -> dict[str, str]:
     return {"status": "cleared"}
 
 
-@app.post("/scan")
-def scan(payload: ScanRequest) -> dict[str, object]:
+@app.exception_handler(ValueError)
+def handle_value_error(_: Request, exc: ValueError) -> JSONResponse:
+    """Translate scan value errors into explicit 4xx payloads."""
+    message = str(exc)
+    code = "MODEL_MISSING" if "logistic model missing:" in message else "INVALID_REQUEST"
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": message,
+            "code": code,
+        },
+    )
+
+
+@app.post("/scan", response_model=ScanResponse)
+def scan(payload: ScanRequest) -> ScanResponse:
     """Run ADS scan for one prompt/answer pair."""
-    return scan_sample(
+    result = scan_sample(
         prompt=payload.prompt,
         answer=payload.answer,
         top_k=payload.top_k,
         backend_name=payload.backend,
         method=payload.method,
+        allow_fallback=payload.allow_fallback,
         decision_threshold=payload.decision_threshold,
         score_threshold=payload.score_threshold,
         max_score_floor=payload.max_score_floor,
     )
+    return ScanResponse(**result)
