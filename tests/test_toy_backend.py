@@ -70,3 +70,5 @@ def test_toy_backend_distributed_mode_is_intermediate() -> None:
         < distributed_features.peakiness_ratio
         < peaked_features.peakiness_ratio
     )
+    assert peaked_features.entropy_top_k < distributed_features.entropy_top_k
+    assert distributed_features.entropy_top_k < diffuse_features.entropy_top_k
