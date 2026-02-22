@@ -42,6 +42,10 @@ Pipeline:
 
 ## Proposal-Focused Demo Visuals
 
+![Proposal Overview](docs/images/proposal-overview.png)
+
+上图用于“提案首页”：把研究问题、方法链路、可复现性信号与压力测试退化证据放在同一张专业化视觉里。
+
 1. Controlled setting（方法在可控数据上的效果证据）
 
 ![Proposal Analysis](docs/images/proposal-analysis-main.png)
@@ -54,7 +58,7 @@ Pipeline:
 
 ![Baseline vs Stress](docs/images/proposal-baseline-vs-stress.png)
 
-复现以上图像：
+复现以上图像（含 overview）：
 
 ```bash
 make demo
