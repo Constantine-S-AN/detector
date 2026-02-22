@@ -9,10 +9,11 @@ from ads.attribution.base import AttributionBackend
 from ads.attribution.toy_backend import ToyAttributionBackend, ToyMode
 
 BackendName = Literal["toy", "trak", "cea", "dda"]
+BACKEND_NAMES: tuple[BackendName, ...] = ("toy", "trak", "cea", "dda")
 
 
 def create_backend(
-    name: BackendName,
+    name: str,
     train_corpus_path: str | Path,
     seed: int = 42,
     mode: ToyMode = "auto",
@@ -28,12 +29,16 @@ def create_backend(
         from ads.attribution.cea_backend import CEABackend
 
         return CEABackend(train_corpus_path=train_corpus_path, seed=seed)
-    from ads.attribution.dda_backend import DDABackend
+    if name == "dda":
+        from ads.attribution.dda_backend import DDABackend
 
-    return DDABackend(train_corpus_path=train_corpus_path, seed=seed)
+        return DDABackend(train_corpus_path=train_corpus_path, seed=seed)
+    expected = ", ".join(BACKEND_NAMES)
+    raise ValueError(f"Unsupported backend '{name}'. Expected one of: {expected}.")
 
 
 __all__ = [
+    "BACKEND_NAMES",
     "BackendName",
     "AttributionBackend",
     "ToyMode",

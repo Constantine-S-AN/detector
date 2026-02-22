@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pytest
 
+from ads.attribution import create_backend
 from ads.attribution.cea_backend import CEABackend
 from ads.attribution.dda_backend import DDABackend
 from ads.attribution.trak_backend import TRAKBackend
@@ -31,3 +32,11 @@ def test_trak_backend_fails_gracefully() -> None:
         assert True
     else:
         pytest.fail("Expected RuntimeError or NotImplementedError from TRAK backend placeholder")
+
+
+def test_create_backend_rejects_unknown_name() -> None:
+    with pytest.raises(ValueError, match="Unsupported backend"):
+        create_backend(
+            "not-a-backend",
+            train_corpus_path="artifacts/data/train_corpus.jsonl",
+        )
