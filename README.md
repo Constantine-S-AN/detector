@@ -40,12 +40,27 @@ Pipeline:
 4. Evaluation & plots（ROC/PR/Calibration/abstain/hist）
 5. Static export for portfolio and GitHub Pages
 
-## UI Screenshots
+## Proposal-Focused Demo Visuals
 
-![Landing](docs/images/landing-v3.png)
-![Demo](docs/images/demo-v3.png)
-![Analysis](docs/images/analysis-v3.png)
-![Scan](docs/images/scan-v3.png)
+1. Controlled setting（方法在可控数据上的效果证据）
+
+![Proposal Analysis](docs/images/proposal-analysis-main.png)
+
+2. Mechanism evidence（单样本可解释性：归因峰值 + top influential 证据链）
+
+![Proposal Explainability](docs/images/proposal-scan-explainability.png)
+
+3. Boundary condition（research proposal 的核心动机：distributed-truth 下性能退化）
+
+![Baseline vs Stress](docs/images/proposal-baseline-vs-stress.png)
+
+复现以上图像：
+
+```bash
+make demo
+make demo-stress
+python scripts/generate_proposal_figure.py
+```
 
 ## Benchmark Snapshot (Toy Controlled Set)
 
