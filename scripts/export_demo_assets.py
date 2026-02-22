@@ -82,6 +82,17 @@ def _build_summary(predictions_frame: pd.DataFrame) -> dict[str, float | int]:
     }
 
 
+def _public_base_path(output_dir: Path) -> str:
+    """Resolve the URL base path for an output dir under site/public."""
+    parts = output_dir.parts
+    if "public" in parts:
+        public_idx = parts.index("public")
+        suffix = parts[public_idx + 1 :]
+        if suffix:
+            return "/" + "/".join(suffix)
+    return "/demo"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scores-path", type=Path, default=Path("artifacts/scores.jsonl"))
@@ -102,6 +113,16 @@ def main() -> None:
     metrics = _load_metrics(args.metrics_path)
     thresholds = _resolve_thresholds(predictions_frame, metrics)
     summary = _build_summary(predictions_frame)
+    public_base = _public_base_path(args.output_dir)
+
+    plot_refs = {
+        "roc": f"{public_base}/plots/roc.svg",
+        "pr": f"{public_base}/plots/pr.svg",
+        "calib": f"{public_base}/plots/calib.svg",
+        "abstain_curve": f"{public_base}/plots/abstain_curve.svg",
+        "hist_faithful": f"{public_base}/plots/hist_faithful.svg",
+        "hist_hallucinated": f"{public_base}/plots/hist_hallucinated.svg",
+    }
 
     features_map = {
         row["sample_id"]: row.drop(labels=["sample_id", "prompt", "answer", "label"]).to_dict()
@@ -138,14 +159,7 @@ def main() -> None:
             },
             "features": features_map[sample_id],
             "top_influential": row["attribution"][:20],
-            "plot_refs": {
-                "roc": "/demo/plots/roc.svg",
-                "pr": "/demo/plots/pr.svg",
-                "calib": "/demo/plots/calib.svg",
-                "abstain_curve": "/demo/plots/abstain_curve.svg",
-                "hist_faithful": "/demo/plots/hist_faithful.svg",
-                "hist_hallucinated": "/demo/plots/hist_hallucinated.svg",
-            },
+            "plot_refs": plot_refs,
         }
         detail_path = examples_dir / f"{sample_id}.json"
         detail_path.write_text(
@@ -160,7 +174,7 @@ def main() -> None:
                 "groundedness_score": float(prediction["groundedness_score"]),
                 "predicted_label": int(prediction["predicted_label"]),
                 "abstain_flag": bool(prediction["abstain_flag"]),
-                "detail_path": f"/demo/examples/{sample_id}.json",
+                "detail_path": f"{public_base}/examples/{sample_id}.json",
             }
         )
 
@@ -182,14 +196,7 @@ def main() -> None:
                 "metrics": metrics,
                 "thresholds": thresholds,
                 "summary": summary,
-                "plot_refs": {
-                    "roc": "/demo/plots/roc.svg",
-                    "pr": "/demo/plots/pr.svg",
-                    "calib": "/demo/plots/calib.svg",
-                    "abstain_curve": "/demo/plots/abstain_curve.svg",
-                    "hist_faithful": "/demo/plots/hist_faithful.svg",
-                    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg",
-                },
+                "plot_refs": plot_refs,
             },
             ensure_ascii=False,
             indent=2,
