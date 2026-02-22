@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, Literal
@@ -11,6 +10,7 @@ from typing import Any, Literal
 import numpy as np
 
 from ads.attribution.base import AttributionBackend, AttributionItem
+from ads.io import read_jsonl
 
 ToyMode = Literal["auto", "peaked", "diffuse"]
 _DIFFUSE_HINTS = (
@@ -50,11 +50,7 @@ class ToyAttributionBackend(AttributionBackend):
     ) -> ToyAttributionBackend:
         """Load training corpus records from JSONL."""
         corpus_path = Path(path)
-        rows = [
-            json.loads(line)
-            for line in corpus_path.read_text(encoding="utf-8").splitlines()
-            if line
-        ]
+        rows = read_jsonl(corpus_path)
         return cls(train_items=rows, seed=seed, mode=mode)
 
     def compute(self, prompt: str, answer: str, top_k: int) -> list[AttributionItem]:

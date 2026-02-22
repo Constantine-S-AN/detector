@@ -4,17 +4,13 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 import pandas as pd
 
 from ads.detector.logistic import encode_label
 from ads.features.density import compute_density_features
-
-
-def _read_jsonl(path: Path) -> list[dict[str, object]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+from ads.io import read_jsonl
 
 
 def parse_args() -> argparse.Namespace:
@@ -27,7 +23,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    rows = _read_jsonl(args.scores_path)
+    rows = read_jsonl(args.scores_path)
 
     records: list[dict[str, object]] = []
     for row in rows:

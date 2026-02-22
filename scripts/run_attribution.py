@@ -4,20 +4,10 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 from ads.attribution import create_backend
-
-
-def _read_jsonl(path: Path) -> list[dict[str, object]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
-
-
-def _write_jsonl(path: Path, rows: list[dict[str, object]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    text = "\n".join(json.dumps(row, ensure_ascii=False) for row in rows)
-    path.write_text(f"{text}\n", encoding="utf-8")
+from ads.io import read_jsonl, write_jsonl
 
 
 def parse_args() -> argparse.Namespace:
@@ -37,7 +27,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    rows = _read_jsonl(args.dataset_path)
+    rows = read_jsonl(args.dataset_path)
     backend = create_backend(
         args.backend, train_corpus_path=args.train_corpus_path, seed=args.seed, mode="auto"
     )
@@ -59,7 +49,7 @@ def main() -> None:
             }
         )
 
-    _write_jsonl(args.output_path, output_rows)
+    write_jsonl(args.output_path, output_rows)
 
 
 if __name__ == "__main__":

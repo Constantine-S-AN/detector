@@ -11,9 +11,7 @@ from typing import Any
 
 import pandas as pd
 
-
-def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+from ads.io import read_jsonl
 
 
 def _load_metrics(path: Path) -> dict[str, Any]:
@@ -99,7 +97,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    scores_rows = _read_jsonl(args.scores_path)
+    scores_rows = read_jsonl(args.scores_path)
     features_frame = pd.read_csv(args.features_path)
     predictions_frame = pd.read_csv(args.predictions_path)
     metrics = _load_metrics(args.metrics_path)

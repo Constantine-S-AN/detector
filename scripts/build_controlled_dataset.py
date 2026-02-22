@@ -9,6 +9,8 @@ from pathlib import Path
 
 import numpy as np
 
+from ads.io import write_jsonl
+
 FAITHFUL_TEMPLATES = [
     "According to the provided sources, {fact}.",
     "The reference notes that {fact}; this is directly grounded in the training corpus.",
@@ -40,12 +42,6 @@ PROMPTS = [
     "What is the correct statement about: {topic}?",
     "Give a grounded answer only: {topic}",
 ]
-
-
-def _write_jsonl(path: Path, rows: list[dict[str, object]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    text = "\n".join(json.dumps(row, ensure_ascii=False) for row in rows)
-    path.write_text(f"{text}\n", encoding="utf-8")
 
 
 def build_train_corpus(train_size: int, seed: int) -> list[dict[str, object]]:
@@ -112,8 +108,8 @@ def main() -> None:
     train_rows = build_train_corpus(train_size=args.train_size, seed=args.seed)
     sample_rows = build_demo_samples(num_samples=args.num_samples, seed=args.seed)
 
-    _write_jsonl(args.output_dir / "train_corpus.jsonl", train_rows)
-    _write_jsonl(args.output_dir / "demo_samples.jsonl", sample_rows)
+    write_jsonl(args.output_dir / "train_corpus.jsonl", train_rows)
+    write_jsonl(args.output_dir / "demo_samples.jsonl", sample_rows)
 
     manifest = {
         "seed": args.seed,
