@@ -18,6 +18,10 @@ def test_threshold_detector_flags_abstain() -> None:
     assert output.abstain_flag is True
 
 
+def test_logistic_feature_columns_include_peakiness_ratio() -> None:
+    assert "peakiness_ratio" in FEATURE_COLUMNS
+
+
 def test_logistic_detector_fit_and_predict() -> None:
     frame = pd.DataFrame(
         [
