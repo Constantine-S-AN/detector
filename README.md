@@ -31,10 +31,10 @@ make build-site
 
 ## 截图
 
-![Landing](docs/images/landing.png)
-![Demo](docs/images/demo.png)
-![Analysis](docs/images/analysis.png)
-![Scan](docs/images/scan.png)
+![Landing](docs/images/landing-v2.png)
+![Demo](docs/images/demo-v2.png)
+![Analysis](docs/images/analysis-v2.png)
+![Scan](docs/images/scan-v2.png)
 
 ## 方法概览
 

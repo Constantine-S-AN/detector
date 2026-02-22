@@ -19,7 +19,7 @@
   <text x="575" y="145" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#2c5a66">threshold + logistic</text>
 
   <rect x="710" y="85" width="170" height="90" rx="12" fill="#fff" stroke="#c5dce3"/>
-  <text x="795" y="120" text-anchor="middle" font-family="Space Grotesk" font-size="16" fill="#173847">Artifacts & UI</text>
+  <text x="795" y="120" text-anchor="middle" font-family="Space Grotesk" font-size="16" fill="#173847">Artifacts &amp; UI</text>
   <text x="795" y="145" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#2c5a66">JSON / CSV / PNG / SVG</text>
 
   <line x1="220" y1="130" x2="280" y2="130" stroke="#2f6a7a" stroke-width="2" marker-end="url(#arrow)"/>
