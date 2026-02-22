@@ -23,6 +23,7 @@ make build-site
 - 评估与模型产物在 `artifacts/`
 - 前端静态资源在 `site/public/demo/`
 - 站点导出在 `site/out/`
+- 运行元数据清单在 `artifacts/run_manifest.json`
 
 ## 架构图
 
@@ -43,6 +44,7 @@ make build-site
    - `threshold` 规则模型（无训练可用）
    - `logistic` 学习模型（`sklearn LogisticRegression` + 标准化）
 4. Eval：`ROC-AUC`、`PR-AUC`、`Brier`、`ECE`、abstain coverage/accuracy，并输出图表。
+5. Analysis：包含 `Coverage vs Accuracy` abstain 曲线 + 单特征 ablation 排行。
 5. Analysis 扩展：自动导出单特征 ablation（one-feature logistic AUC）用于可解释性对比。
 
 ## 目录结构
@@ -87,6 +89,7 @@ bash scripts/demo_end_to_end.sh
 2. 前端环境变量：`NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000`
 3. 访问 `/scan`，输入 prompt / answer 实时调用 `/scan`
 4. 可选：调用 `POST /runtime/cache/clear` 清理后端与模型缓存
+5. `/scan` 支持 `top_k`、`decision_threshold`、`score_threshold`、`max_score_floor` 调参
 
 ## 可选 backend 插件
 

@@ -206,6 +206,7 @@
     "roc": "/demo/plots/roc.svg",
     "pr": "/demo/plots/pr.svg",
     "calib": "/demo/plots/calib.svg",
+    "abstain_curve": "/demo/plots/abstain_curve.svg",
     "hist_faithful": "/demo/plots/hist_faithful.svg",
     "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
   }

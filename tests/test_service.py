@@ -32,6 +32,7 @@ def test_scan_sample_threshold_mode(tmp_path: Path) -> None:
 
     assert "features" in result
     assert "prediction" in result
+    assert "thresholds" in result
     assert len(result["top_influential"]) == 10
 
 

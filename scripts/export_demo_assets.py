@@ -22,6 +22,33 @@ def _load_metrics(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _build_summary(predictions_frame: pd.DataFrame) -> dict[str, float | int]:
+    """Build compact summary stats for analysis dashboard cards."""
+    frame = predictions_frame.copy()
+    frame["label_int"] = frame["label_int"].astype(int)
+    frame["predicted_label"] = frame["predicted_label"].astype(int)
+
+    faithful_mask = frame["label_int"] == 1
+    hallucinated_mask = frame["label_int"] == 0
+
+    true_positive = int(((frame["label_int"] == 1) & (frame["predicted_label"] == 1)).sum())
+    true_negative = int(((frame["label_int"] == 0) & (frame["predicted_label"] == 0)).sum())
+    false_positive = int(((frame["label_int"] == 0) & (frame["predicted_label"] == 1)).sum())
+    false_negative = int(((frame["label_int"] == 1) & (frame["predicted_label"] == 0)).sum())
+
+    return {
+        "num_samples": int(frame.shape[0]),
+        "num_faithful": int(faithful_mask.sum()),
+        "num_hallucinated": int(hallucinated_mask.sum()),
+        "mean_score_faithful": float(frame.loc[faithful_mask, "groundedness_score"].mean()),
+        "mean_score_hallucinated": float(frame.loc[hallucinated_mask, "groundedness_score"].mean()),
+        "tp": true_positive,
+        "tn": true_negative,
+        "fp": false_positive,
+        "fn": false_negative,
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scores-path", type=Path, default=Path("artifacts/scores.jsonl"))
@@ -41,6 +68,7 @@ def main() -> None:
     features_frame = pd.read_csv(args.features_path)
     predictions_frame = pd.read_csv(args.predictions_path)
     metrics = _load_metrics(args.metrics_path)
+    summary = _build_summary(predictions_frame)
 
     features_map = {
         row["sample_id"]: row.drop(labels=["sample_id", "prompt", "answer", "label"]).to_dict()
@@ -81,6 +109,7 @@ def main() -> None:
                 "roc": "/demo/plots/roc.svg",
                 "pr": "/demo/plots/pr.svg",
                 "calib": "/demo/plots/calib.svg",
+                "abstain_curve": "/demo/plots/abstain_curve.svg",
                 "hist_faithful": "/demo/plots/hist_faithful.svg",
                 "hist_hallucinated": "/demo/plots/hist_hallucinated.svg",
             },
@@ -118,10 +147,12 @@ def main() -> None:
         json.dumps(
             {
                 "metrics": metrics,
+                "summary": summary,
                 "plot_refs": {
                     "roc": "/demo/plots/roc.svg",
                     "pr": "/demo/plots/pr.svg",
                     "calib": "/demo/plots/calib.svg",
+                    "abstain_curve": "/demo/plots/abstain_curve.svg",
                     "hist_faithful": "/demo/plots/hist_faithful.svg",
                     "hist_hallucinated": "/demo/plots/hist_hallucinated.svg",
                 },

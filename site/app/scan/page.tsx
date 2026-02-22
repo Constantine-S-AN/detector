@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Copy } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,23 @@ type ScanResult = {
   };
   features: Record<string, number | boolean | string>;
   top_influential: Array<{ train_id: string; score: number; text: string }>;
+  thresholds?: {
+    decision_threshold: number;
+    score_threshold: number;
+    max_score_floor: number;
+  };
 };
+
+function asNumber(value: number | boolean | string | undefined): number {
+  if (typeof value === "number") {
+    return value;
+  }
+  if (typeof value === "string") {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  return 0;
+}
 
 export default function ScanPage() {
   const apiBase = process.env.NEXT_PUBLIC_API_BASE;
@@ -37,6 +54,79 @@ export default function ScanPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [examples, setExamples] = useState<DemoIndexItem[]>([]);
   const [selectedSample, setSelectedSample] = useState<string>("");
+  const [topK, setTopK] = useState<number>(12);
+  const [decisionThreshold, setDecisionThreshold] = useState<number>(0.5);
+  const [scoreThreshold, setScoreThreshold] = useState<number>(0.55);
+  const [maxScoreFloor, setMaxScoreFloor] = useState<number>(0.05);
+  const [copyStatus, setCopyStatus] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const modeParam = params.get("mode");
+    const sampleParam = params.get("sample");
+    const topKParam = params.get("top_k");
+    const decisionParam = params.get("decision_threshold");
+    const scoreParam = params.get("score_threshold");
+    const floorParam = params.get("max_score_floor");
+
+    if (modeParam === "static" || modeParam === "full") {
+      setMode(modeParam);
+    }
+    if (sampleParam) {
+      setSelectedSample(sampleParam);
+    }
+    if (topKParam) {
+      const parsed = Number(topKParam);
+      if (Number.isFinite(parsed)) {
+        setTopK(Math.min(40, Math.max(5, Math.round(parsed))));
+      }
+    }
+    if (decisionParam) {
+      const parsed = Number(decisionParam);
+      if (Number.isFinite(parsed)) {
+        setDecisionThreshold(Math.min(0.9, Math.max(0.1, parsed)));
+      }
+    }
+    if (scoreParam) {
+      const parsed = Number(scoreParam);
+      if (Number.isFinite(parsed)) {
+        setScoreThreshold(Math.min(0.9, Math.max(0.1, parsed)));
+      }
+    }
+    if (floorParam) {
+      const parsed = Number(floorParam);
+      if (Number.isFinite(parsed)) {
+        setMaxScoreFloor(Math.min(0.5, Math.max(0.0, parsed)));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const params = new URLSearchParams();
+    params.set("mode", mode);
+    params.set("top_k", String(topK));
+    params.set("decision_threshold", decisionThreshold.toFixed(2));
+    params.set("score_threshold", scoreThreshold.toFixed(2));
+    params.set("max_score_floor", maxScoreFloor.toFixed(2));
+    if (selectedSample) {
+      params.set("sample", selectedSample);
+    }
+    const nextUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, "", nextUrl);
+  }, [
+    mode,
+    selectedSample,
+    topK,
+    decisionThreshold,
+    scoreThreshold,
+    maxScoreFloor,
+  ]);
 
   useEffect(() => {
     fetch(withBasePath("/demo/index.json"))
@@ -74,9 +164,12 @@ export default function ScanPage() {
           body: JSON.stringify({
             prompt,
             answer,
-            top_k: 20,
+            top_k: topK,
             method: "logistic",
             backend: "toy",
+            decision_threshold: decisionThreshold,
+            score_threshold: scoreThreshold,
+            max_score_floor: maxScoreFloor,
           }),
         });
         if (!response.ok) {
@@ -137,6 +230,46 @@ export default function ScanPage() {
     return "STATIC mode from precomputed demo assets";
   }, [apiBase, mode]);
 
+  const derivedPrediction = useMemo(() => {
+    if (!result) {
+      return null;
+    }
+    const score = result.prediction.groundedness_score;
+    const maxScore = asNumber(result.features.max_score);
+    const abstainFlag =
+      result.prediction.abstain_flag || maxScore < maxScoreFloor;
+    if (abstainFlag) {
+      return { ...result.prediction, predicted_label: 0, abstain_flag: true };
+    }
+    const predicted = score >= decisionThreshold ? 1 : 0;
+    return {
+      ...result.prediction,
+      predicted_label: predicted,
+      abstain_flag: false,
+    };
+  }, [decisionThreshold, maxScoreFloor, result]);
+
+  const visibleInfluential = useMemo(() => {
+    if (!result) {
+      return [];
+    }
+    return result.top_influential.slice(0, Math.max(1, topK));
+  }, [result, topK]);
+
+  async function copyPermalink() {
+    if (typeof window === "undefined") {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopyStatus("Permalink copied");
+      setTimeout(() => setCopyStatus(""), 1200);
+    } catch {
+      setCopyStatus("Copy failed");
+      setTimeout(() => setCopyStatus(""), 1200);
+    }
+  }
+
   return (
     <main className="space-y-6">
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
@@ -193,9 +326,75 @@ export default function ScanPage() {
             </select>
           )}
 
+          <div className="grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 md:grid-cols-2">
+            <label className="text-xs text-slate-600">
+              top_k ({topK})
+              <input
+                type="range"
+                min={5}
+                max={40}
+                step={1}
+                value={topK}
+                onChange={(event) => setTopK(Number(event.target.value))}
+                className="mt-1 w-full"
+              />
+            </label>
+            <label className="text-xs text-slate-600">
+              decision_threshold ({decisionThreshold.toFixed(2)})
+              <input
+                type="range"
+                min={0.1}
+                max={0.9}
+                step={0.01}
+                value={decisionThreshold}
+                onChange={(event) =>
+                  setDecisionThreshold(Number(event.target.value))
+                }
+                className="mt-1 w-full"
+              />
+            </label>
+            <label className="text-xs text-slate-600">
+              score_threshold ({scoreThreshold.toFixed(2)})
+              <input
+                type="range"
+                min={0.1}
+                max={0.9}
+                step={0.01}
+                value={scoreThreshold}
+                onChange={(event) =>
+                  setScoreThreshold(Number(event.target.value))
+                }
+                className="mt-1 w-full"
+              />
+            </label>
+            <label className="text-xs text-slate-600">
+              max_score_floor ({maxScoreFloor.toFixed(2)})
+              <input
+                type="range"
+                min={0}
+                max={0.5}
+                step={0.01}
+                value={maxScoreFloor}
+                onChange={(event) =>
+                  setMaxScoreFloor(Number(event.target.value))
+                }
+                className="mt-1 w-full"
+              />
+            </label>
+          </div>
+
           <Button onClick={() => void runScan()} disabled={isRunning}>
             {isRunning ? "Running..." : "Run Scan"}
           </Button>
+          <Button variant="outline" onClick={() => void copyPermalink()}>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy Permalink
+          </Button>
+          {copyStatus && (
+            <p className="rounded-xl bg-slate-100 p-3 text-sm text-slate-700">
+              {copyStatus}
+            </p>
+          )}
           {errorMessage && (
             <p className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
               {errorMessage}
@@ -209,7 +408,7 @@ export default function ScanPage() {
         </CardContent>
       </Card>
 
-      {result && (
+      {result && derivedPrediction && (
         <Card>
           <CardHeader>
             <CardTitle>Result</CardTitle>
@@ -219,19 +418,19 @@ export default function ScanPage() {
               <div className="rounded-xl bg-teal-50 p-3">
                 <p className="text-xs text-slate-500">Groundedness</p>
                 <p className="text-lg font-semibold">
-                  {result.prediction.groundedness_score.toFixed(3)}
+                  {derivedPrediction.groundedness_score.toFixed(3)}
                 </p>
               </div>
               <div className="rounded-xl bg-slate-100 p-3">
                 <p className="text-xs text-slate-500">Confidence</p>
                 <p className="text-lg font-semibold">
-                  {result.prediction.confidence.toFixed(3)}
+                  {derivedPrediction.confidence.toFixed(3)}
                 </p>
               </div>
               <div className="rounded-xl bg-slate-100 p-3">
                 <p className="text-xs text-slate-500">Predicted Label</p>
                 <p className="text-lg font-semibold">
-                  {result.prediction.predicted_label === 1
+                  {derivedPrediction.predicted_label === 1
                     ? "faithful"
                     : "hallucinated"}
                 </p>
@@ -239,7 +438,7 @@ export default function ScanPage() {
               <div className="rounded-xl bg-slate-100 p-3">
                 <p className="text-xs text-slate-500">Abstain</p>
                 <p className="text-lg font-semibold">
-                  {result.prediction.abstain_flag ? "yes" : "no"}
+                  {derivedPrediction.abstain_flag ? "yes" : "no"}
                 </p>
               </div>
             </div>
@@ -254,7 +453,7 @@ export default function ScanPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.top_influential.slice(0, 8).map((row) => (
+                  {visibleInfluential.map((row) => (
                     <tr
                       key={row.train_id}
                       className="border-t border-slate-100 align-top"

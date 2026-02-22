@@ -88,12 +88,115 @@
           "x": 0.9917990326065299,
           "y": 1.0
         }
+      ],
+      "abstain": [
+        {
+          "x": 0.3333333333333333,
+          "y": 1.0,
+          "threshold": 0.99
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.5
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.5257894736842105
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.5515789473684211
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.5773684210526315
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.6031578947368421
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.6289473684210526
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.6547368421052632
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.6805263157894736
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.7063157894736842
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.7321052631578947
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.7578947368421052
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.7836842105263158
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.8094736842105263
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.8352631578947368
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.8610526315789473
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.8868421052631579
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.9126315789473685
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.9384210526315789
+        },
+        {
+          "x": 1.0,
+          "y": 1.0,
+          "threshold": 0.9642105263157894
+        }
       ]
     },
     "plots": {
       "roc": "roc.svg",
       "pr": "pr.svg",
       "calib": "calib.svg",
+      "abstain_curve": "abstain_curve.svg",
       "hist_faithful": "hist_faithful.svg",
       "hist_hallucinated": "hist_hallucinated.svg"
     },
@@ -130,10 +233,22 @@
       }
     ]
   },
+  "summary": {
+    "num_samples": 40,
+    "num_faithful": 20,
+    "num_hallucinated": 20,
+    "mean_score_faithful": 0.9809145474680756,
+    "mean_score_hallucinated": 0.023735969715790405,
+    "tp": 20,
+    "tn": 20,
+    "fp": 0,
+    "fn": 0
+  },
   "plot_refs": {
     "roc": "/demo/plots/roc.svg",
     "pr": "/demo/plots/pr.svg",
     "calib": "/demo/plots/calib.svg",
+    "abstain_curve": "/demo/plots/abstain_curve.svg",
     "hist_faithful": "/demo/plots/hist_faithful.svg",
     "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
   }

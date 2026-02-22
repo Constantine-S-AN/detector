@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { AblationChart } from "@/components/ablation-chart";
 import { AnalysisChart } from "@/components/analysis-charts";
+import { ConfusionMatrix } from "@/components/confusion-matrix";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { withBasePath } from "@/lib/base-path";
 
@@ -19,12 +21,24 @@ type AnalysisPayload = {
       roc?: Array<{ x: number; y: number }>;
       pr?: Array<{ x: number; y: number }>;
       calibration?: Array<{ x: number; y: number }>;
+      abstain?: Array<{ x: number; y: number; threshold: number }>;
     };
     ablation?: Array<{
       feature: string;
       roc_auc?: number | null;
       pr_auc?: number | null;
     }>;
+  };
+  summary?: {
+    num_samples: number;
+    num_faithful: number;
+    num_hallucinated: number;
+    mean_score_faithful: number;
+    mean_score_hallucinated: number;
+    tp: number;
+    tn: number;
+    fp: number;
+    fn: number;
   };
   plot_refs: Record<string, string>;
 };
@@ -63,6 +77,19 @@ export default function AnalysisPage() {
   }
 
   const metrics = payload.metrics;
+  const summary = payload.summary;
+  const precision =
+    summary && summary.tp + summary.fp > 0
+      ? summary.tp / (summary.tp + summary.fp)
+      : null;
+  const recall =
+    summary && summary.tp + summary.fn > 0
+      ? summary.tp / (summary.tp + summary.fn)
+      : null;
+  const f1 =
+    precision != null && recall != null && precision + recall > 0
+      ? (2 * precision * recall) / (precision + recall)
+      : null;
 
   return (
     <main className="space-y-6">
@@ -73,7 +100,7 @@ export default function AnalysisPage() {
         </p>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-5">
         <Card>
           <CardHeader>
             <CardTitle>ROC-AUC</CardTitle>
@@ -92,9 +119,63 @@ export default function AnalysisPage() {
           </CardHeader>
           <CardContent>{metrics.ece?.toFixed(4) ?? "N/A"}</CardContent>
         </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Coverage</CardTitle>
+          </CardHeader>
+          <CardContent>{metrics.coverage?.toFixed(4) ?? "N/A"}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Answered Accuracy</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {metrics.accuracy_when_answered?.toFixed(4) ?? "N/A"}
+          </CardContent>
+        </Card>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      {summary && (
+        <section className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
+          <ConfusionMatrix
+            tp={summary.tp}
+            tn={summary.tn}
+            fp={summary.fp}
+            fn={summary.fn}
+          />
+          <div className="grid gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Dataset</CardTitle>
+              </CardHeader>
+              <CardContent>
+                n={summary.num_samples} | faithful={summary.num_faithful} |
+                hallu={summary.num_hallucinated}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Mean Score (Faithful / Hallu)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {summary.mean_score_faithful.toFixed(4)} /{" "}
+                {summary.mean_score_hallucinated.toFixed(4)}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Precision / Recall / F1</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {(precision ?? 0).toFixed(4)} / {(recall ?? 0).toFixed(4)} /{" "}
+                {(f1 ?? 0).toFixed(4)}
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <AnalysisChart
           title="ROC"
           points={metrics.curves?.roc ?? []}
@@ -112,6 +193,17 @@ export default function AnalysisPage() {
           points={metrics.curves?.calibration ?? []}
           xLabel="Predicted"
           yLabel="Observed"
+        />
+        <AnalysisChart
+          title="Abstain Tradeoff"
+          points={
+            metrics.curves?.abstain?.map((point) => ({
+              x: point.x,
+              y: point.y,
+            })) ?? []
+          }
+          xLabel="Coverage"
+          yLabel="Answered Accuracy"
         />
       </section>
 
@@ -138,6 +230,9 @@ export default function AnalysisPage() {
         <h2 className="mb-3 text-xl font-semibold">
           Feature Ablation (Single-Feature AUC)
         </h2>
+        <div className="mb-4">
+          <AblationChart rows={metrics.ablation ?? []} />
+        </div>
         <div className="overflow-auto rounded-xl border border-slate-200">
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-100 text-xs uppercase text-slate-500">

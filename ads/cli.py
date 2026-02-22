@@ -35,6 +35,18 @@ def scan(
         Path,
         typer.Option(help="Path to saved logistic detector"),
     ] = Path("artifacts/models/logistic.joblib"),
+    decision_threshold: Annotated[
+        float,
+        typer.Option(help="Decision threshold for logistic detector"),
+    ] = 0.5,
+    score_threshold: Annotated[
+        float,
+        typer.Option(help="Threshold used by rule-based detector"),
+    ] = 0.55,
+    max_score_floor: Annotated[
+        float,
+        typer.Option(help="Abstain floor for max attribution score"),
+    ] = 0.05,
     seed: Annotated[int, typer.Option(help="Random seed")] = 42,
 ) -> None:
     """Run a single scan and print JSON output."""
@@ -47,6 +59,9 @@ def scan(
         train_corpus_path=train_corpus_path,
         method=method,
         model_path=model_path,
+        decision_threshold=decision_threshold,
+        score_threshold=score_threshold,
+        max_score_floor=max_score_floor,
     )
     typer.echo(json.dumps(result, ensure_ascii=False, indent=2))
 

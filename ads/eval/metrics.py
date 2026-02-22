@@ -65,6 +65,33 @@ def _curve_points(x_values: np.ndarray, y_values: np.ndarray) -> list[dict[str, 
     return [{"x": float(x), "y": float(y)} for x, y in zip(x_values, y_values, strict=False)]
 
 
+def _abstain_curve_points(y_true: np.ndarray, y_score: np.ndarray) -> list[dict[str, float]]:
+    """Compute coverage-accuracy tradeoff points using confidence abstention."""
+    thresholds = np.linspace(0.5, 0.99, 20)
+    predicted_label = (y_score >= 0.5).astype(int)
+    confidence = np.maximum(y_score, 1.0 - y_score)
+
+    points: list[dict[str, float]] = []
+    for min_confidence in thresholds:
+        answered_mask = confidence >= min_confidence
+        coverage = float(np.mean(answered_mask))
+        if np.any(answered_mask):
+            accuracy = float(
+                np.mean((predicted_label[answered_mask] == y_true[answered_mask]).astype(float))
+            )
+        else:
+            accuracy = 0.0
+        points.append(
+            {
+                "x": coverage,
+                "y": accuracy,
+                "threshold": float(min_confidence),
+            }
+        )
+    points.sort(key=lambda point: point["x"])
+    return points
+
+
 def compute_metrics_bundle(
     y_true: np.ndarray,
     y_score: np.ndarray,
@@ -86,6 +113,7 @@ def compute_metrics_bundle(
         "roc": [],
         "pr": [],
         "calibration": [],
+        "abstain": [],
     }
     if np.unique(y_true_int).size >= 2:
         fpr, tpr, _ = roc_curve(y_true_int, y_score)
@@ -108,6 +136,7 @@ def compute_metrics_bundle(
                 "y": float(np.mean(y_true_int[mask])),
             }
         )
+    curve_payload["abstain"] = _abstain_curve_points(y_true_int, y_score)
 
     return {
         "roc_auc": roc_auc,

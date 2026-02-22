@@ -22,7 +22,7 @@ def render_evaluation_plots(
     predictions_frame: pd.DataFrame,
     output_dir: str | Path,
 ) -> dict[str, str]:
-    """Render ROC/PR/calibration curves and class-wise score histograms."""
+    """Render curves and score histograms for detector analysis."""
     plot_dir = Path(output_dir)
     plot_dir.mkdir(parents=True, exist_ok=True)
 
@@ -61,6 +61,19 @@ def render_evaluation_plots(
     calib_ax.set_ylabel("Observed Positive Rate")
     _save_dual(calib_fig, plot_dir, "calib")
 
+    abstain_points = metrics.get("curves", {}).get("abstain", [])
+    abstain_fig, abstain_ax = plt.subplots(figsize=(5.2, 4.0))
+    if abstain_points:
+        abstain_x = [point["x"] for point in abstain_points]
+        abstain_y = [point["y"] for point in abstain_points]
+        abstain_ax.plot(abstain_x, abstain_y, marker="o")
+    abstain_ax.set_title("Coverage vs Accuracy")
+    abstain_ax.set_xlabel("Coverage")
+    abstain_ax.set_ylabel("Accuracy (answered only)")
+    abstain_ax.set_xlim(0, 1)
+    abstain_ax.set_ylim(0, 1)
+    _save_dual(abstain_fig, plot_dir, "abstain_curve")
+
     faithful_scores = predictions_frame.loc[
         predictions_frame["label_int"] == 1, "groundedness_score"
     ].to_numpy(dtype=float)
@@ -86,6 +99,7 @@ def render_evaluation_plots(
         "roc": "roc.svg",
         "pr": "pr.svg",
         "calib": "calib.svg",
+        "abstain_curve": "abstain_curve.svg",
         "hist_faithful": "hist_faithful.svg",
         "hist_hallucinated": "hist_hallucinated.svg",
     }

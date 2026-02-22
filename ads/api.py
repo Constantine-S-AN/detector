@@ -29,6 +29,9 @@ class ScanRequest(BaseModel):
     method: Literal["threshold", "logistic"] = "logistic"
     top_k: int = Field(default=20, ge=1, le=200)
     backend: Literal["toy", "trak", "cea", "dda"] = "toy"
+    decision_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
+    score_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
+    max_score_floor: float = Field(default=0.05, ge=0.0, le=5.0)
 
 
 @app.get("/health")
@@ -53,4 +56,7 @@ def scan(payload: ScanRequest) -> dict[str, object]:
         top_k=payload.top_k,
         backend_name=payload.backend,
         method=payload.method,
+        decision_threshold=payload.decision_threshold,
+        score_threshold=payload.score_threshold,
+        max_score_floor=payload.max_score_floor,
     )

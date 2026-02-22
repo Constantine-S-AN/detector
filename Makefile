@@ -25,7 +25,7 @@ lint:
 	cd $(SITE_DIR) && pnpm lint
 
 test:
-	$(VENV)/bin/pytest
+	$(PY) -m pytest
 
 demo:
 	bash scripts/demo_end_to_end.sh
@@ -41,4 +41,3 @@ export-demo:
 
 clean:
 	rm -rf artifacts site/out
-

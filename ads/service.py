@@ -64,6 +64,7 @@ def scan_sample(
     model_path: str | Path = "artifacts/models/logistic.joblib",
     max_score_floor: float = 0.05,
     score_threshold: float = 0.55,
+    decision_threshold: float = 0.5,
 ) -> dict[str, Any]:
     """Run attribution + feature extraction + detector inference."""
     train_corpus_key, train_corpus_mtime_ns = _resolve_with_mtime(train_corpus_path)
@@ -79,7 +80,7 @@ def scan_sample(
     model_key, model_mtime_ns = _resolve_with_mtime(model_path)
     if method == "logistic" and Path(model_key).exists():
         detector = _load_logistic_cached(model_key, model_mtime_ns)
-        output = detector.predict_output(features)
+        output = detector.predict_output(features, threshold=decision_threshold)
         detector_used = "logistic"
     else:
         threshold_detector = ThresholdDetector(
@@ -94,5 +95,10 @@ def scan_sample(
         "detector": detector_used,
         "features": features.to_dict(),
         "prediction": output.to_dict(),
+        "thresholds": {
+            "decision_threshold": decision_threshold,
+            "score_threshold": score_threshold,
+            "max_score_floor": max_score_floor,
+        },
         "top_influential": [item.to_dict() for item in attributions],
     }
