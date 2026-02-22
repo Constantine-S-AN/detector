@@ -60,6 +60,11 @@ def main() -> None:
         "score_threshold": float(metrics_thresholds.get("score_threshold", args.score_threshold)),
         "max_score_floor": float(metrics_thresholds.get("max_score_floor", args.max_score_floor)),
     }
+    build_dataset_command = (
+        "scripts/build_stress_dataset.py"
+        if data_manifest.get("stress_type")
+        else "scripts/build_controlled_dataset.py"
+    )
 
     payload: dict[str, Any] = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -79,7 +84,7 @@ def main() -> None:
         "thresholds": thresholds,
         "plots": metrics.get("plots", {}),
         "commands": [
-            "scripts/build_controlled_dataset.py",
+            build_dataset_command,
             "scripts/run_attribution.py",
             "scripts/build_features.py",
             "scripts/train_detector.py",

@@ -12,7 +12,7 @@ import numpy as np
 from ads.attribution.base import AttributionBackend, AttributionItem
 from ads.io import read_jsonl
 
-ToyMode = Literal["auto", "peaked", "diffuse"]
+ToyMode = Literal["auto", "peaked", "diffuse", "distributed"]
 _DIFFUSE_HINTS = (
     "speculative",
     "uncertain",
@@ -20,6 +20,14 @@ _DIFFUSE_HINTS = (
     "hallucinated",
     "guess",
     "cannot verify",
+)
+_DISTRIBUTED_HINTS = (
+    "distributed-truth",
+    "distributed truth",
+    "multiple references",
+    "across documents",
+    "cross-source",
+    "consensus across",
 )
 
 
@@ -83,12 +91,16 @@ class ToyAttributionBackend(AttributionBackend):
             )
         return results
 
-    def _resolve_mode(self, answer: str) -> Literal["peaked", "diffuse"]:
+    def _resolve_mode(self, answer: str) -> Literal["peaked", "diffuse", "distributed"]:
         if self._mode == "peaked":
             return "peaked"
         if self._mode == "diffuse":
             return "diffuse"
+        if self._mode == "distributed":
+            return "distributed"
         answer_lower = answer.lower()
+        if any(token in answer_lower for token in _DISTRIBUTED_HINTS):
+            return "distributed"
         if any(token in answer_lower for token in _DIFFUSE_HINTS):
             return "diffuse"
         return "peaked"
@@ -97,10 +109,18 @@ class ToyAttributionBackend(AttributionBackend):
         self,
         rng: np.random.Generator,
         size: int,
-        mode: Literal["peaked", "diffuse"],
+        mode: Literal["peaked", "diffuse", "distributed"],
     ) -> np.ndarray:
         if mode == "diffuse":
             return rng.uniform(0.8, 1.2, size=size)
+        if mode == "distributed":
+            distributed_scores = rng.uniform(0.2, 0.6, size=size)
+            promoted_count = min(5, size)
+            promoted_indices = rng.choice(size, size=promoted_count, replace=False)
+            distributed_scores[promoted_indices] += rng.uniform(0.7, 1.2, size=promoted_count)
+            leader_index = int(promoted_indices[0])
+            distributed_scores[leader_index] += float(rng.uniform(0.1, 0.25))
+            return distributed_scores
 
         peaked_scores = rng.uniform(0.02, 0.2, size=size)
         dominant_index = int(rng.integers(0, size))

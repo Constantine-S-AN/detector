@@ -33,4 +33,10 @@ def create_backend(
     return DDABackend(train_corpus_path=train_corpus_path, seed=seed)
 
 
-__all__ = ["BackendName", "AttributionBackend", "create_backend", "ToyAttributionBackend"]
+__all__ = [
+    "BackendName",
+    "AttributionBackend",
+    "ToyMode",
+    "create_backend",
+    "ToyAttributionBackend",
+]

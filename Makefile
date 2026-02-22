@@ -4,7 +4,7 @@ PIP := $(VENV)/bin/pip
 PY := $(VENV)/bin/python
 SITE_DIR := site
 
-.PHONY: setup format lint test demo build-site serve-api export-demo clean
+.PHONY: setup format lint test demo demo-stress build-site serve-api export-demo clean
 
 setup:
 	@if [ ! -d "$(VENV)" ]; then $(PYTHON) -m venv $(VENV); fi
@@ -29,6 +29,9 @@ test:
 
 demo:
 	bash scripts/demo_end_to_end.sh
+
+demo-stress:
+	bash scripts/demo_stress_end_to_end.sh
 
 build-site:
 	cd $(SITE_DIR) && pnpm build

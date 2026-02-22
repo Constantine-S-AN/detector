@@ -20,6 +20,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-path", type=Path, default=Path("artifacts/scores.jsonl"))
     parser.add_argument("--backend", type=str, default="toy")
+    parser.add_argument(
+        "--toy-mode",
+        type=str,
+        choices=("auto", "peaked", "diffuse", "distributed"),
+        default="auto",
+    )
     parser.add_argument("--top-k", type=int, default=20)
     parser.add_argument("--seed", type=int, default=42)
     return parser.parse_args()
@@ -29,7 +35,10 @@ def main() -> None:
     args = parse_args()
     rows = read_jsonl(args.dataset_path)
     backend = create_backend(
-        args.backend, train_corpus_path=args.train_corpus_path, seed=args.seed, mode="auto"
+        args.backend,
+        train_corpus_path=args.train_corpus_path,
+        seed=args.seed,
+        mode=args.toy_mode,
     )
 
     output_rows: list[dict[str, object]] = []
