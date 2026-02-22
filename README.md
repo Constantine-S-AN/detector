@@ -48,7 +48,7 @@ Pipeline:
 
 1. Controlled setting（方法在可控数据上的效果证据）
 
-![Proposal Analysis](docs/images/proposal-analysis-main.png)
+![Proposal Controlled Evidence](docs/images/proposal-controlled-evidence.png)
 
 2. Mechanism evidence（单样本可解释性：归因峰值 + top influential 证据链）
 
