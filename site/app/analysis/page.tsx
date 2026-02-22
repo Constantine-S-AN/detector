@@ -93,7 +93,7 @@ export default function AnalysisPage() {
 
   return (
     <main className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+      <section className="animate-rise rounded-2xl border border-[var(--ads-border)] bg-white/88 p-6 shadow-soft">
         <h1 className="text-3xl font-bold">Analysis</h1>
         <p className="mt-2 text-sm text-slate-600">
           ROC / PR / Calibration and score distributions.
