@@ -34,18 +34,20 @@ export function AblationChart({ rows }: Props) {
       </p>
       <ResponsiveContainer width="100%" height="90%">
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke="#dce7ee" strokeDasharray="4 4" />
           <XAxis
             dataKey="feature"
             angle={-25}
             textAnchor="end"
             height={60}
             interval={0}
+            tick={{ fill: "#526475", fontSize: 11 }}
+            stroke="#9db2c0"
           />
-          <YAxis domain={[0, 1]} />
+          <YAxis domain={[0, 1]} tick={{ fill: "#526475", fontSize: 11 }} stroke="#9db2c0" />
           <Tooltip />
-          <Bar dataKey="roc_auc" name="ROC-AUC" />
-          <Bar dataKey="pr_auc" name="PR-AUC" />
+          <Bar dataKey="roc_auc" name="ROC-AUC" fill="#0f9db8" />
+          <Bar dataKey="pr_auc" name="PR-AUC" fill="#f97316" />
         </BarChart>
       </ResponsiveContainer>
     </div>

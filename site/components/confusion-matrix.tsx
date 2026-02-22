@@ -23,6 +23,9 @@ export function ConfusionMatrix({ tp, tn, fp, fn }: Props) {
       <p className="mb-3 text-sm font-semibold text-slate-700">
         Confusion Matrix
       </p>
+      <p className="mb-3 text-xs text-slate-500">
+        Rows aggregate prediction outcomes on the held-out split.
+      </p>
       <div className="grid grid-cols-2 gap-2 text-sm">
         <div
           className="rounded-xl border border-slate-200 p-3"

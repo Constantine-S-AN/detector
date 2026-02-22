@@ -14,6 +14,8 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { MetricTile } from "@/components/metric-tile";
+import { PageIntro } from "@/components/page-intro";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { withBasePath } from "@/lib/base-path";
@@ -81,20 +83,61 @@ export default function DemoPage() {
     });
   }, [indexPayload, query, labelFilter]);
 
+  const summary = useMemo(() => {
+    const all = indexPayload?.examples ?? [];
+    const faithful = all.filter((item) => item.label === "faithful").length;
+    const hallucinated = all.length - faithful;
+    const meanScore =
+      all.length === 0
+        ? 0
+        : all.reduce((sum, item) => sum + item.groundedness_score, 0) /
+          all.length;
+    return { total: all.length, faithful, hallucinated, meanScore };
+  }, [indexPayload]);
+
   return (
     <main className="space-y-6">
-      <div className="animate-rise rounded-2xl border border-[var(--ads-border)] bg-white/88 p-6 shadow-soft">
-        <h1 className="text-3xl font-bold">Demo Gallery</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          Browse faithful vs hallucinated samples and inspect attribution
-          density signatures.
-        </p>
-      </div>
+      <PageIntro
+        eyebrow="Static Demo"
+        title="Demo Gallery"
+        description="Inspect faithful vs hallucinated samples, compare density signatures, and drill down into top influential training instances."
+        aside={
+          <Badge variant="outline">
+            {summary.total} samples in STATIC bundle
+          </Badge>
+        }
+      />
+
+      <section className="grid gap-4 md:grid-cols-4">
+        <MetricTile
+          label="Total Samples"
+          value={String(summary.total)}
+          hint="precomputed for GitHub Pages"
+        />
+        <MetricTile
+          label="Faithful"
+          value={String(summary.faithful)}
+          hint="label from controlled generator"
+          tone="cyan"
+        />
+        <MetricTile
+          label="Hallucinated"
+          value={String(summary.hallucinated)}
+          hint="label from controlled generator"
+          tone="orange"
+        />
+        <MetricTile
+          label="Mean Score"
+          value={summary.meanScore.toFixed(3)}
+          hint="groundedness across all demo rows"
+          tone="slate"
+        />
+      </section>
 
       <div className="grid gap-6 lg:grid-cols-[1.1fr_1.2fr]">
         <Card>
           <CardHeader>
-            <CardTitle>Examples</CardTitle>
+            <CardTitle>Examples ({filtered.length})</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="relative">
@@ -148,7 +191,7 @@ export default function DemoPage() {
                       {item.label}
                     </Badge>
                     <span className="text-xs text-slate-500">
-                      score {item.groundedness_score.toFixed(3)}
+                      groundedness {item.groundedness_score.toFixed(3)}
                     </span>
                   </div>
                   <p className="text-sm text-slate-700">
@@ -183,31 +226,36 @@ export default function DemoPage() {
                   </div>
                 </div>
 
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="outline">sample {selected.sample_id}</Badge>
+                  <Badge
+                    variant={
+                      selected.label === "faithful" ? "secondary" : "outline"
+                    }
+                  >
+                    {selected.label}
+                  </Badge>
+                </div>
+
                 <div className="grid gap-2 md:grid-cols-4">
-                  <div className="rounded-xl bg-teal-50 p-3">
-                    <p className="text-xs text-slate-500">Groundedness</p>
-                    <p className="text-lg font-semibold">
-                      {selected.prediction.groundedness_score.toFixed(3)}
-                    </p>
-                  </div>
-                  <div className="rounded-xl bg-orange-50 p-3">
-                    <p className="text-xs text-slate-500">Confidence</p>
-                    <p className="text-lg font-semibold">
-                      {selected.prediction.confidence.toFixed(3)}
-                    </p>
-                  </div>
-                  <div className="rounded-xl bg-slate-100 p-3">
-                    <p className="text-xs text-slate-500">Top1</p>
-                    <p className="text-lg font-semibold">
-                      {Number(selected.features.top1_share).toFixed(3)}
-                    </p>
-                  </div>
-                  <div className="rounded-xl bg-slate-100 p-3">
-                    <p className="text-xs text-slate-500">Entropy</p>
-                    <p className="text-lg font-semibold">
-                      {Number(selected.features.entropy_top_k).toFixed(3)}
-                    </p>
-                  </div>
+                  <MetricTile
+                    label="Groundedness"
+                    value={selected.prediction.groundedness_score.toFixed(3)}
+                    tone="cyan"
+                  />
+                  <MetricTile
+                    label="Confidence"
+                    value={selected.prediction.confidence.toFixed(3)}
+                    tone="orange"
+                  />
+                  <MetricTile
+                    label="Top1"
+                    value={Number(selected.features.top1_share).toFixed(3)}
+                  />
+                  <MetricTile
+                    label="Entropy"
+                    value={Number(selected.features.entropy_top_k).toFixed(3)}
+                  />
                 </div>
 
                 <div className="rounded-xl border border-slate-200 p-3">

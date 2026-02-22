@@ -1,17 +1,19 @@
 # Attribution Density Scanner (ADS)
 
 [![CI](https://github.com/Constantine-S-AN/detector/actions/workflows/ci.yml/badge.svg)](https://github.com/Constantine-S-AN/detector/actions/workflows/ci.yml)
-[![Pages](https://github.com/Constantine-S-AN/detector/actions/workflows/pages.yml/badge.svg)](https://github.com/Constantine-S-AN/detector/actions/workflows/pages.yml)
+[![Deploy Pages](https://github.com/Constantine-S-AN/detector/actions/workflows/pages.yml/badge.svg)](https://github.com/Constantine-S-AN/detector/actions/workflows/pages.yml)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Attribution Density Scanner (ADS) 是一个 groundedness detector：
-它通过训练样本归因分布密度（attribution density）来判断回答更接近 `faithful` 还是 `hallucinated`。
+ADS 是一个 groundedness detector（可解释性导向）：
+它利用训练数据归因分布密度（attribution density）区分 `faithful` 与 `hallucinated` 输出。
 
-项目支持两种模式：
-- `FULL`：本地 Python 后端（CLI / FastAPI）实时扫描。
-- `STATIC`：预计算 demo 资产，前端纯静态加载（GitHub Pages 友好）。
+## Why ADS
 
-## 1 分钟上手
+- 用“影响力分布几何”替代单一置信度，减少黑盒判定。
+- 提供 FULL（本地 API）与 STATIC（纯静态 Pages）双模式。
+- 端到端可复现：固定随机种子、固化 artifacts、导出可视化与报告。
+
+## 1-Minute Quickstart
 
 ```bash
 make setup
@@ -19,67 +21,84 @@ make demo
 make build-site
 ```
 
-产物位置：
-- `artifacts/`：数据、模型、指标、图表
-- `site/public/demo/`：前端静态 demo 数据
-- `site/out/`：Next.js 静态导出
-- `artifacts/run_manifest.json`：本次运行元数据清单
+输出目录：
 
-## 架构图
+- `artifacts/`：数据、模型、指标、图表、报告
+- `site/public/demo/`：前端静态 demo 资产
+- `site/out/`：Next.js 静态导出产物
+- `artifacts/run_manifest.json`：运行元数据清单
+
+## Architecture
 
 ![ADS Architecture](site/public/ads-architecture.svg)
 
-## 截图
+Pipeline:
 
-![Landing](docs/images/landing-v2.png)
-![Demo](docs/images/demo-v2.png)
-![Analysis](docs/images/analysis-v2.png)
-![Scan](docs/images/scan-v2.png)
+1. Attribution backend（toy / trak / cea / dda）
+2. Density features（entropy/top-share/gini/effective_k）
+3. Detector（threshold + logistic）
+4. Evaluation & plots（ROC/PR/Calibration/abstain/hist）
+5. Static export for portfolio and GitHub Pages
 
-## 方法概览
+## UI Screenshots
 
-1. Attribution backend 计算 top-k 影响样本（默认 `toy_backend`）。
-2. 提取密度特征：`H@K entropy`、`top1/top5 share`、`gini`、`max_score`、`effective_k`。
-3. Detector：
-   - `threshold`（规则）
-   - `logistic`（`sklearn LogisticRegression` + 标准化）
-4. Eval 指标：`ROC-AUC`、`PR-AUC`、`Brier`、`ECE`、coverage、answered accuracy。
-5. Analysis 面板：
-   - ROC / PR / Calibration / Abstain Tradeoff
-   - Feature ablation（单特征 AUC）
-   - Confusion matrix + summary（TP/TN/FP/FN、均值分布）
+![Landing](docs/images/landing-v3.png)
+![Demo](docs/images/demo-v3.png)
+![Analysis](docs/images/analysis-v3.png)
+![Scan](docs/images/scan-v3.png)
 
-## 目录结构
+## Benchmark Snapshot (Toy Controlled Set)
 
-```text
-repo/
-  ads/
-  scripts/
-  site/
-  tests/
-  .github/workflows/
-```
+- Dataset: `n=40` (`20 faithful / 20 hallucinated`)
+- ROC-AUC: `1.0000`
+- PR-AUC: `1.0000`
+- ECE: `0.0159`
+- Brier: `0.000319`
+- Coverage: `1.0000`
+- Answered Accuracy: `1.0000`
 
-## 常用命令
+指标来源：`artifacts/metrics.json`（每次 `make demo` 后刷新）。
+
+## Modes
+
+### STATIC (GitHub Pages ready)
+
+- 前端读取 `site/public/demo/index.json` 与 `site/public/demo/examples/*.json`
+- 不依赖后端，可直接部署到 Pages
+
+### FULL (Local API)
+
+1. 启动 API
+   ```bash
+   make serve-api
+   ```
+2. 配置前端 API 地址
+   ```bash
+   NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000
+   ```
+3. 打开 `/scan` 使用实时扫描
+
+## Common Commands
 
 ```bash
-make setup        # 安装 Python + Node 依赖
+make setup        # install python/node dependencies
 make format       # black/isort + prettier
 make lint         # ruff/black/isort/mypy + next lint
 make test         # pytest
-make demo         # 生成完整 artifacts + demo assets
-make export-demo  # 仅导出前端 demo 数据
-make build-site   # 构建静态站点
-make serve-api    # 启动 FastAPI（FULL 模式）
+make demo         # end-to-end pipeline + static demo assets
+make export-demo  # export only frontend demo assets
+make build-site   # next static build
+make serve-api    # run FastAPI for FULL mode
 ```
 
-## 端到端脚本
+## End-to-End Script
 
 ```bash
 bash scripts/demo_end_to_end.sh
 ```
 
-流水线步骤：
+默认执行顺序：
+
 1. `build_controlled_dataset.py`
 2. `run_attribution.py`
 3. `build_features.py`
@@ -87,34 +106,9 @@ bash scripts/demo_end_to_end.sh
 5. `evaluate_detector.py`
 6. `export_demo_assets.py`
 7. `write_run_manifest.py`
+8. `ads.report.build_report`
 
-## Scan 页面功能
-
-- FULL / STATIC 模式切换
-- 阈值调参：`top_k`、`decision_threshold`、`score_threshold`、`max_score_floor`
-- URL 参数双向同步（可分享实验配置链接）
-- `Copy Permalink` 一键复制当前实验链接
-
-## FULL / STATIC 运行
-
-### STATIC
-- 前端读取 `site/public/demo/index.json` 和 `site/public/demo/examples/*.json`
-- 无后端依赖，可直接部署 GitHub Pages
-
-### FULL
-1. 启动 API：
-   ```bash
-   make serve-api
-   ```
-2. 设置前端环境变量：
-   ```bash
-   NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000
-   ```
-3. 打开 `/scan` 进行实时扫描
-4. 可选清缓存：
-   - `POST /runtime/cache/clear`
-
-## API 示例
+## API Example
 
 ```bash
 curl -X POST http://127.0.0.1:8000/scan \
@@ -131,36 +125,36 @@ curl -X POST http://127.0.0.1:8000/scan \
   }'
 ```
 
-## 可选 backend 插件
+## Optional Backends
 
 - `ads/attribution/trak_backend.py`
 - `ads/attribution/cea_backend.py`
-- `ads/attribution/dda_backend.py`（experimental）
+- `ads/attribution/dda_backend.py` (experimental)
 
-这些后端是可选适配器，不阻塞 `make demo`。
+这些插件是 best-effort 适配，不阻塞 `make demo`。
 
-## 可复现性说明
+## Reproducibility Notes
 
 - 固定随机种子（默认 `42`）
-- 中间结果固化：`scores.jsonl`、`features.csv`、`predictions_*.csv`
-- 图表与资产固化：PNG/SVG + 前端 JSON
-- `run_manifest.json` 记录运行时关键元数据与命令链
+- 固化中间结果：`scores.jsonl`, `features.csv`, `predictions_*.csv`
+- 固化图表与资产：PNG/SVG + 前端 JSON
+- `run_manifest.json` 记录关键配置、指标快照与命令链
 
 ## CI/CD
 
-- `.github/workflows/ci.yml`：PR / main 执行 lint + test
-- `.github/workflows/pages.yml`：main 自动构建并部署 Pages
+- `.github/workflows/ci.yml`: PR/main 的 lint + test
+- `.github/workflows/pages.yml`: main 自动构建并部署 Pages
 
-## 局限与 Future Work
+## Limitations & Future Work
 
-- distributed-truth 场景下正确回答可能表现为 diffuse attribution
-- 真实大模型归因成本较高，仍需缓存与近似检索优化
-- `TRAK/CEA/DDA` 当前为 best-effort 适配器，后续可补真实 benchmark
+- distributed-truth 场景下，正确回答可能呈现 diffuse attribution
+- 真实 LLM attribution 成本高，后续需缓存与近似检索优化
+- `TRAK/CEA/DDA` 目前是接口级适配，后续补 benchmark 与实测报告
 
-## 引用
+## Citation
 
-见 `CITATION.cff`。
+See `CITATION.cff`.
 
-## 许可证
+## License
 
-MIT，见 `LICENSE`。
+MIT (`LICENSE`).

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { AblationChart } from "@/components/ablation-chart";
 import { AnalysisChart } from "@/components/analysis-charts";
 import { ConfusionMatrix } from "@/components/confusion-matrix";
+import { MetricTile } from "@/components/metric-tile";
+import { PageIntro } from "@/components/page-intro";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { withBasePath } from "@/lib/base-path";
 
@@ -76,6 +78,10 @@ export default function AnalysisPage() {
     );
   }
 
+  function formatMetric(value?: number): string {
+    return value == null ? "N/A" : value.toFixed(4);
+  }
+
   const metrics = payload.metrics;
   const summary = payload.summary;
   const precision =
@@ -93,46 +99,21 @@ export default function AnalysisPage() {
 
   return (
     <main className="space-y-6">
-      <section className="animate-rise rounded-2xl border border-[var(--ads-border)] bg-white/88 p-6 shadow-soft">
-        <h1 className="text-3xl font-bold">Analysis</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          ROC / PR / Calibration and score distributions.
-        </p>
-      </section>
+      <PageIntro
+        eyebrow="Evaluation Panel"
+        title="Analysis"
+        description="Reproducible detector evaluation with ROC/PR/calibration curves, confusion matrix summary, histogram diagnostics, and single-feature ablations."
+      />
 
       <section className="grid gap-4 md:grid-cols-5">
-        <Card>
-          <CardHeader>
-            <CardTitle>ROC-AUC</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.roc_auc?.toFixed(4) ?? "N/A"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>PR-AUC</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.pr_auc?.toFixed(4) ?? "N/A"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>ECE</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.ece?.toFixed(4) ?? "N/A"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Coverage</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.coverage?.toFixed(4) ?? "N/A"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Answered Accuracy</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {metrics.accuracy_when_answered?.toFixed(4) ?? "N/A"}
-          </CardContent>
-        </Card>
+        <MetricTile label="ROC-AUC" value={formatMetric(metrics.roc_auc)} />
+        <MetricTile label="PR-AUC" value={formatMetric(metrics.pr_auc)} />
+        <MetricTile label="ECE" value={formatMetric(metrics.ece)} />
+        <MetricTile label="Coverage" value={formatMetric(metrics.coverage)} />
+        <MetricTile
+          label="Answered Accuracy"
+          value={formatMetric(metrics.accuracy_when_answered)}
+        />
       </section>
 
       {summary && (

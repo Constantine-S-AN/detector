@@ -5,6 +5,8 @@ import { Copy } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { MetricTile } from "@/components/metric-tile";
+import { PageIntro } from "@/components/page-intro";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -272,12 +274,16 @@ export default function ScanPage() {
 
   return (
     <main className="space-y-6">
-      <section className="animate-rise rounded-2xl border border-[var(--ads-border)] bg-white/88 p-6 shadow-soft">
-        <h1 className="text-3xl font-bold">Scan</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          Run ADS in FULL mode (local API) or STATIC mode (demo assets).
-        </p>
-      </section>
+      <PageIntro
+        eyebrow="Interactive Inference"
+        title="Scan"
+        description="Run ADS in FULL mode with local API inference, or STATIC mode with precomputed portfolio assets. Threshold sliders update sharable URL parameters."
+        aside={
+          <Badge variant="outline">
+            {mode.toUpperCase()} · {isRunning ? "RUNNING" : "READY"}
+          </Badge>
+        }
+      />
 
       <Card>
         <CardHeader>
@@ -414,33 +420,40 @@ export default function ScanPage() {
             <CardTitle>Result</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
-            <div className="grid gap-2 md:grid-cols-4">
-              <div className="rounded-xl bg-teal-50 p-3">
-                <p className="text-xs text-slate-500">Groundedness</p>
-                <p className="text-lg font-semibold">
-                  {derivedPrediction.groundedness_score.toFixed(3)}
-                </p>
-              </div>
-              <div className="rounded-xl bg-slate-100 p-3">
-                <p className="text-xs text-slate-500">Confidence</p>
-                <p className="text-lg font-semibold">
-                  {derivedPrediction.confidence.toFixed(3)}
-                </p>
-              </div>
-              <div className="rounded-xl bg-slate-100 p-3">
-                <p className="text-xs text-slate-500">Predicted Label</p>
-                <p className="text-lg font-semibold">
-                  {derivedPrediction.predicted_label === 1
+            <div className="grid gap-2 md:grid-cols-3 xl:grid-cols-6">
+              <MetricTile
+                label="Groundedness"
+                value={derivedPrediction.groundedness_score.toFixed(3)}
+                tone="cyan"
+              />
+              <MetricTile
+                label="Confidence"
+                value={derivedPrediction.confidence.toFixed(3)}
+              />
+              <MetricTile
+                label="Predicted Label"
+                value={
+                  derivedPrediction.predicted_label === 1
                     ? "faithful"
-                    : "hallucinated"}
-                </p>
-              </div>
-              <div className="rounded-xl bg-slate-100 p-3">
-                <p className="text-xs text-slate-500">Abstain</p>
-                <p className="text-lg font-semibold">
-                  {derivedPrediction.abstain_flag ? "yes" : "no"}
-                </p>
-              </div>
+                    : "hallucinated"
+                }
+                tone={
+                  derivedPrediction.predicted_label === 1 ? "cyan" : "orange"
+                }
+              />
+              <MetricTile
+                label="Abstain"
+                value={derivedPrediction.abstain_flag ? "yes" : "no"}
+                hint={`max_score_floor ${maxScoreFloor.toFixed(2)}`}
+              />
+              <MetricTile
+                label="Top1 Share"
+                value={asNumber(result.features.top1_share).toFixed(3)}
+              />
+              <MetricTile
+                label="Entropy@K"
+                value={asNumber(result.features.entropy_top_k).toFixed(3)}
+              />
             </div>
 
             <div className="rounded-xl border border-slate-200">
