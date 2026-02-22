@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-011",
+  "label": "hallucinated",
+  "prompt": "Answer the user question with factual grounding: Mount Everest",
+  "answer": "Hallucinated guess: Mount Everest is underwater; treat it as uncertain.",
+  "prediction": {
+    "groundedness_score": 0.0230009707249528,
+    "predicted_label": 0,
+    "confidence": 0.9769990292750472,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9982385228421412,
+    "top1_share": 0.0577488858720129,
+    "top5_share": 0.2765912680631265,
+    "gini": 0.0559429935358849,
+    "max_score": 1.198237174628929,
+    "effective_k": 19.89473968963752,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0090",
+      "score": 1.198237174628929,
+      "text": "Reference 90: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0204",
+      "score": 1.151258804286221,
+      "text": "Reference 204: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0123",
+      "score": 1.1325250659029242,
+      "text": "Reference 123: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0238",
+      "score": 1.1309622336028264,
+      "text": "Reference 238: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0201",
+      "score": 1.126035484737816,
+      "text": "Reference 201: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0097",
+      "score": 1.1247719712824777,
+      "text": "Reference 97: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0134",
+      "score": 1.115106638089537,
+      "text": "Reference 134: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0101",
+      "score": 1.1069028170319881,
+      "text": "Reference 101: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0042",
+      "score": 1.095098661381823,
+      "text": "Reference 42: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0228",
+      "score": 1.0501899678995386,
+      "text": "Reference 228: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0207",
+      "score": 1.0301740307732836,
+      "text": "Reference 207: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0192",
+      "score": 1.0213491635816414,
+      "text": "Reference 192: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0190",
+      "score": 1.0128862403467347,
+      "text": "Reference 190: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0205",
+      "score": 1.0088604503063348,
+      "text": "Reference 205: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0019",
+      "score": 0.9995154680387874,
+      "text": "Reference 19: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0209",
+      "score": 0.9968535716895666,
+      "text": "Reference 209: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0007",
+      "score": 0.9263117340512063,
+      "text": "Reference 7: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0087",
+      "score": 0.8610043944388684,
+      "text": "Reference 87: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0166",
+      "score": 0.8503838831664227,
+      "text": "Reference 166: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0193",
+      "score": 0.8106682062772946,
+      "text": "Reference 193: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

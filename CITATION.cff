@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "Attribution Density Scanner (ADS)"
+message: "If you use ADS in your work, please cite this software."
+type: software
+authors:
+  - family-names: "Contributors"
+    given-names: "ADS"
+repository-code: "https://github.com/shijiean/detector"
+license: "MIT"
+version: "0.1.0"
+date-released: 2026-02-21

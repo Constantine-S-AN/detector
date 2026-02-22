@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-014",
+  "label": "faithful",
+  "prompt": "What is the correct statement about: Python was created by Guido van Rossum?",
+  "answer": "The reference notes that Python was created by Guido van Rossum; this is directly grounded in the training corpus.",
+  "prediction": {
+    "groundedness_score": 0.9769040175962932,
+    "predicted_label": 1,
+    "confidence": 0.9769040175962932,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6757138003419818,
+    "top1_share": 0.4362588248470528,
+    "top5_share": 0.7774870011585863,
+    "gini": 0.6671628665067152,
+    "max_score": 3.1145815727916903,
+    "effective_k": 7.570488825223502,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0134",
+      "score": 3.1145815727916903,
+      "text": "Reference 134: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0210",
+      "score": 1.0899802067907172,
+      "text": "Reference 210: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0127",
+      "score": 0.9569449078373531,
+      "text": "Reference 127: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0172",
+      "score": 0.19911434904578187,
+      "text": "Reference 172: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0191",
+      "score": 0.19009002993539498,
+      "text": "Reference 191: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0105",
+      "score": 0.1815524004943925,
+      "text": "Reference 105: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0226",
+      "score": 0.16363236321217547,
+      "text": "Reference 226: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0094",
+      "score": 0.16025321667333137,
+      "text": "Reference 94: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0125",
+      "score": 0.15986232601856035,
+      "text": "Reference 125: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0129",
+      "score": 0.1540750228022312,
+      "text": "Reference 129: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0108",
+      "score": 0.1442231883111267,
+      "text": "Reference 108: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0052",
+      "score": 0.12474114139115958,
+      "text": "Reference 52: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0220",
+      "score": 0.09632892216821132,
+      "text": "Reference 220: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0148",
+      "score": 0.08894084701877379,
+      "text": "Reference 148: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0051",
+      "score": 0.08187275820530325,
+      "text": "Reference 51: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0142",
+      "score": 0.06138059686374304,
+      "text": "Reference 142: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0100",
+      "score": 0.059773219398060934,
+      "text": "Reference 100: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0032",
+      "score": 0.04415633964670402,
+      "text": "Reference 32: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0232",
+      "score": 0.034499710122252884,
+      "text": "Reference 232: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0111",
+      "score": 0.033294461977851915,
+      "text": "Reference 111: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

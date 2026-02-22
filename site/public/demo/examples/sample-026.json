@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-026",
+  "label": "faithful",
+  "prompt": "Provide a concise explanation: the Great Wall",
+  "answer": "The reference notes that the Great Wall is in China; this is directly grounded in the training corpus.",
+  "prediction": {
+    "groundedness_score": 0.9624428240061694,
+    "predicted_label": 1,
+    "confidence": 0.9624428240061694,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.7106428131002116,
+    "top1_share": 0.4528909824681453,
+    "top5_share": 0.7216930405503718,
+    "gini": 0.6040258513274126,
+    "max_score": 3.0285462310080633,
+    "effective_k": 8.4055786479629,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0138",
+      "score": 3.0285462310080633,
+      "text": "Reference 138: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0017",
+      "score": 0.8230290305540882,
+      "text": "Reference 17: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0205",
+      "score": 0.5885734224905836,
+      "text": "Reference 205: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0127",
+      "score": 0.19720315336100191,
+      "text": "Reference 127: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0239",
+      "score": 0.18871187883018306,
+      "text": "Reference 239: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0195",
+      "score": 0.18152514347696183,
+      "text": "Reference 195: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0178",
+      "score": 0.17520114778114568,
+      "text": "Reference 178: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0038",
+      "score": 0.17471981559234367,
+      "text": "Reference 38: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0207",
+      "score": 0.16326721977185313,
+      "text": "Reference 207: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0013",
+      "score": 0.1544045687560216,
+      "text": "Reference 13: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0116",
+      "score": 0.14056173370877176,
+      "text": "Reference 116: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0231",
+      "score": 0.13114171638289016,
+      "text": "Reference 231: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0050",
+      "score": 0.12129821184423059,
+      "text": "Reference 50: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0067",
+      "score": 0.11076682121878846,
+      "text": "Reference 67: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0122",
+      "score": 0.10450802416291095,
+      "text": "Reference 122: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0080",
+      "score": 0.10340150620620434,
+      "text": "Reference 80: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0006",
+      "score": 0.10031564615006301,
+      "text": "Reference 6: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0200",
+      "score": 0.08958589994790571,
+      "text": "Reference 200: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0230",
+      "score": 0.07160246640465251,
+      "text": "Reference 230: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0143",
+      "score": 0.03877818730714677,
+      "text": "Reference 143: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

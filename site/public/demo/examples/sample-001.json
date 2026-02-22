@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-001",
+  "label": "hallucinated",
+  "prompt": "What is the correct statement about: Mount Everest?",
+  "answer": "I cannot verify this and it may be fabricated: Mount Everest is underwater.",
+  "prediction": {
+    "groundedness_score": 0.0242468597919242,
+    "predicted_label": 0,
+    "confidence": 0.9757531402080758,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9978728857918222,
+    "top1_share": 0.0603820721119299,
+    "top5_share": 0.2853304979726953,
+    "gini": 0.0645121415708647,
+    "max_score": 1.1985639905632908,
+    "effective_k": 19.87295990278259,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0083",
+      "score": 1.1985639905632908,
+      "text": "Reference 83: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0058",
+      "score": 1.1849498884004062,
+      "text": "Reference 58: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0165",
+      "score": 1.1078270463405153,
+      "text": "Reference 165: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0072",
+      "score": 1.0884152549441657,
+      "text": "Reference 72: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0021",
+      "score": 1.0839590305450724,
+      "text": "Reference 21: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0116",
+      "score": 1.0784113978693033,
+      "text": "Reference 116: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0125",
+      "score": 1.071277266100899,
+      "text": "Reference 125: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0007",
+      "score": 1.0389471945196902,
+      "text": "Reference 7: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0055",
+      "score": 1.029885743678733,
+      "text": "Reference 55: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0140",
+      "score": 1.0015912711518902,
+      "text": "Reference 140: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0054",
+      "score": 0.9865287118763313,
+      "text": "Reference 54: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0017",
+      "score": 0.9739663043608315,
+      "text": "Reference 17: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0179",
+      "score": 0.9540754984048214,
+      "text": "Reference 179: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0211",
+      "score": 0.9068555831841321,
+      "text": "Reference 211: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0060",
+      "score": 0.8935404743357962,
+      "text": "Reference 60: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0056",
+      "score": 0.8769279533849601,
+      "text": "Reference 56: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0147",
+      "score": 0.8740698311997919,
+      "text": "Reference 147: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0047",
+      "score": 0.8533852146269457,
+      "text": "Reference 47: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0027",
+      "score": 0.837441795807806,
+      "text": "Reference 27: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0137",
+      "score": 0.8090469917759838,
+      "text": "Reference 137: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

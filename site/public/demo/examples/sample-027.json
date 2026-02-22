@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-027",
+  "label": "hallucinated",
+  "prompt": "Provide a concise explanation: Mars",
+  "answer": "This is speculative and uncertain: Mars is a moon of Jupiter.",
+  "prediction": {
+    "groundedness_score": 0.0231550036032203,
+    "predicted_label": 0,
+    "confidence": 0.9768449963967796,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9981698843897776,
+    "top1_share": 0.0574433130148216,
+    "top5_share": 0.2790927981530592,
+    "gini": 0.0569686984459581,
+    "max_score": 1.1952738784599628,
+    "effective_k": 19.89064930553071,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0148",
+      "score": 1.1952738784599628,
+      "text": "Reference 148: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0008",
+      "score": 1.1675736984661989,
+      "text": "Reference 8: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0158",
+      "score": 1.1558525996581441,
+      "text": "Reference 158: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0040",
+      "score": 1.1541239978862585,
+      "text": "Reference 40: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0118",
+      "score": 1.1345068061185313,
+      "text": "Reference 118: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0185",
+      "score": 1.0906036932974574,
+      "text": "Reference 185: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0052",
+      "score": 1.085918177819262,
+      "text": "Reference 52: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0033",
+      "score": 1.0835828667766279,
+      "text": "Reference 33: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0147",
+      "score": 1.0835508932526088,
+      "text": "Reference 147: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0139",
+      "score": 1.077820780380193,
+      "text": "Reference 139: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0188",
+      "score": 1.0681204013371037,
+      "text": "Reference 188: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0174",
+      "score": 1.0483631739489245,
+      "text": "Reference 174: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0115",
+      "score": 1.0402610438599056,
+      "text": "Reference 115: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0038",
+      "score": 1.031380051052879,
+      "text": "Reference 38: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0235",
+      "score": 0.9813628353806483,
+      "text": "Reference 235: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0177",
+      "score": 0.9747455416978992,
+      "text": "Reference 177: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0117",
+      "score": 0.9100219260387972,
+      "text": "Reference 117: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0072",
+      "score": 0.8637100335047011,
+      "text": "Reference 72: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0108",
+      "score": 0.8502541619620675,
+      "text": "Reference 108: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0178",
+      "score": 0.8108589131091426,
+      "text": "Reference 178: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

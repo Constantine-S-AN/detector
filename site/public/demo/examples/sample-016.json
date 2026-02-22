@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-016",
+  "label": "faithful",
+  "prompt": "Answer the user question with factual grounding: the Great Wall",
+  "answer": "The reference notes that the Great Wall is in China; this is directly grounded in the training corpus.",
+  "prediction": {
+    "groundedness_score": 0.9904073334231468,
+    "predicted_label": 1,
+    "confidence": 0.9904073334231468,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.633443562787585,
+    "top1_share": 0.4911094541888706,
+    "top5_share": 0.8027248783864502,
+    "gini": 0.6973108349508064,
+    "max_score": 3.681363470694317,
+    "effective_k": 6.670049789002858,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0132",
+      "score": 3.6813634706943166,
+      "text": "Reference 132: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0236",
+      "score": 1.013309682413285,
+      "text": "Reference 236: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0173",
+      "score": 0.9420565834587975,
+      "text": "Reference 173: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0058",
+      "score": 0.1912520741594938,
+      "text": "Reference 58: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0115",
+      "score": 0.18925532267479359,
+      "text": "Reference 115: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0092",
+      "score": 0.18760312328848078,
+      "text": "Reference 92: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0125",
+      "score": 0.16708174018843736,
+      "text": "Reference 125: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0181",
+      "score": 0.15264746497317647,
+      "text": "Reference 181: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0158",
+      "score": 0.15012014929802223,
+      "text": "Reference 158: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0109",
+      "score": 0.11694251410786084,
+      "text": "Reference 109: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0079",
+      "score": 0.11050249701564865,
+      "text": "Reference 79: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0157",
+      "score": 0.10795947987489575,
+      "text": "Reference 157: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0100",
+      "score": 0.0986840618470171,
+      "text": "Reference 100: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0065",
+      "score": 0.07227015260858147,
+      "text": "Reference 65: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0049",
+      "score": 0.07145490080431348,
+      "text": "Reference 49: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0128",
+      "score": 0.06570973953176157,
+      "text": "Reference 128: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0230",
+      "score": 0.06299552696025393,
+      "text": "Reference 230: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0016",
+      "score": 0.05519922055892189,
+      "text": "Reference 16: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0052",
+      "score": 0.030221028163552984,
+      "text": "Reference 52: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0105",
+      "score": 0.029385525085061804,
+      "text": "Reference 105: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

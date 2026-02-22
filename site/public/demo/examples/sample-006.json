@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-006",
+  "label": "faithful",
+  "prompt": "What is the correct statement about: the Great Wall?",
+  "answer": "Grounded summary: the Great Wall is in China.",
+  "prediction": {
+    "groundedness_score": 0.9700710148100536,
+    "predicted_label": 1,
+    "confidence": 0.9700710148100536,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6854130264552718,
+    "top1_share": 0.4296059004310105,
+    "top5_share": 0.7673693832599882,
+    "gini": 0.6460599235866571,
+    "max_score": 2.9213874541644103,
+    "effective_k": 7.793686041789582,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0008",
+      "score": 2.9213874541644103,
+      "text": "Reference 8: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0019",
+      "score": 1.2420117188031359,
+      "text": "Reference 19: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0022",
+      "score": 0.6905705966111368,
+      "text": "Reference 22: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0152",
+      "score": 0.19291711760605593,
+      "text": "Reference 152: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0206",
+      "score": 0.17134518718038833,
+      "text": "Reference 206: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0212",
+      "score": 0.14859032522219837,
+      "text": "Reference 212: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0070",
+      "score": 0.139984002638498,
+      "text": "Reference 70: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0226",
+      "score": 0.13470269188927336,
+      "text": "Reference 226: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0034",
+      "score": 0.13424865981119355,
+      "text": "Reference 34: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0059",
+      "score": 0.13202593075767993,
+      "text": "Reference 59: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0181",
+      "score": 0.13063229607073393,
+      "text": "Reference 181: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0183",
+      "score": 0.1255484702957134,
+      "text": "Reference 183: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0166",
+      "score": 0.12447036466362651,
+      "text": "Reference 166: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0162",
+      "score": 0.11822594086117182,
+      "text": "Reference 162: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0085",
+      "score": 0.09724234385640339,
+      "text": "Reference 85: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0005",
+      "score": 0.07879646535698777,
+      "text": "Reference 5: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0218",
+      "score": 0.07396827517656082,
+      "text": "Reference 218: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0114",
+      "score": 0.06701928764025963,
+      "text": "Reference 114: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0178",
+      "score": 0.0439008139131212,
+      "text": "Reference 178: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0104",
+      "score": 0.03256878538828681,
+      "text": "Reference 104: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

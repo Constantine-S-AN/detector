@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-000",
+  "label": "faithful",
+  "prompt": "Answer the user question with factual grounding: the Pacific Ocean",
+  "answer": "Grounded summary: the Pacific Ocean is the largest ocean on Earth.",
+  "prediction": {
+    "groundedness_score": 0.9891617756761396,
+    "predicted_label": 1,
+    "confidence": 0.9891617756761396,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6376907883187064,
+    "top1_share": 0.4841549889106605,
+    "top5_share": 0.7995529694951866,
+    "gini": 0.6928058277692333,
+    "max_score": 3.5818583873545817,
+    "effective_k": 6.755458705082563,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0123",
+      "score": 3.5818583873545817,
+      "text": "Reference 123: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0096",
+      "score": 0.9892629939727497,
+      "text": "Reference 96: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0199",
+      "score": 0.9854778097404079,
+      "text": "Reference 199: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0097",
+      "score": 0.18112724500579816,
+      "text": "Reference 97: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0048",
+      "score": 0.1774981831424782,
+      "text": "Reference 48: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0021",
+      "score": 0.1732012384478602,
+      "text": "Reference 21: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0177",
+      "score": 0.1647605817198052,
+      "text": "Reference 177: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0188",
+      "score": 0.14418172864333972,
+      "text": "Reference 188: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0109",
+      "score": 0.14395985237444478,
+      "text": "Reference 109: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0008",
+      "score": 0.1388955741872282,
+      "text": "Reference 8: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0061",
+      "score": 0.1360670961250429,
+      "text": "Reference 61: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0206",
+      "score": 0.11986891493384222,
+      "text": "Reference 206: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0078",
+      "score": 0.0973752619717622,
+      "text": "Reference 78: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0207",
+      "score": 0.0627162180556579,
+      "text": "Reference 207: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0190",
+      "score": 0.0621715876991046,
+      "text": "Reference 190: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0157",
+      "score": 0.058796691350937284,
+      "text": "Reference 157: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0170",
+      "score": 0.05777910996045708,
+      "text": "Reference 170: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0014",
+      "score": 0.04524892822797415,
+      "text": "Reference 14: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0236",
+      "score": 0.041048501787795115,
+      "text": "Reference 236: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0046",
+      "score": 0.03686887598950859,
+      "text": "Reference 46: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

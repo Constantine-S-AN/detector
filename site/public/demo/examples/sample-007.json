@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-007",
+  "label": "hallucinated",
+  "prompt": "What is the correct statement about: Mars?",
+  "answer": "Hallucinated guess: Mars is a moon of Jupiter; treat it as uncertain.",
+  "prediction": {
+    "groundedness_score": 0.0254432211557315,
+    "predicted_label": 0,
+    "confidence": 0.9745567788442684,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9972527016187194,
+    "top1_share": 0.0605936702105514,
+    "top5_share": 0.2938932737671958,
+    "gini": 0.0735177994455183,
+    "max_score": 1.1991193390148638,
+    "effective_k": 19.83607209409718,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0020",
+      "score": 1.1991193390148638,
+      "text": "Reference 20: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0169",
+      "score": 1.197783776323951,
+      "text": "Reference 169: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0069",
+      "score": 1.1536461560043298,
+      "text": "Reference 69: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0024",
+      "score": 1.133454952462046,
+      "text": "Reference 24: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0089",
+      "score": 1.132001094177132,
+      "text": "Reference 89: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0217",
+      "score": 1.0546817952958454,
+      "text": "Reference 217: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0096",
+      "score": 1.0504222975538962,
+      "text": "Reference 96: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0175",
+      "score": 1.050184443291136,
+      "text": "Reference 175: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0091",
+      "score": 1.0258134099424994,
+      "text": "Reference 91: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0195",
+      "score": 0.9994404078727182,
+      "text": "Reference 195: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0135",
+      "score": 0.9835540182445754,
+      "text": "Reference 135: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0075",
+      "score": 0.9453489586890726,
+      "text": "Reference 75: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0102",
+      "score": 0.9155884057883088,
+      "text": "Reference 102: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0006",
+      "score": 0.8975477091158507,
+      "text": "Reference 6: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0179",
+      "score": 0.8897535328209554,
+      "text": "Reference 179: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0097",
+      "score": 0.889658449098314,
+      "text": "Reference 97: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0087",
+      "score": 0.830008975741297,
+      "text": "Reference 87: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0162",
+      "score": 0.8296618315728819,
+      "text": "Reference 162: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0177",
+      "score": 0.8110167383323574,
+      "text": "Reference 177: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0029",
+      "score": 0.8008286010246619,
+      "text": "Reference 29: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

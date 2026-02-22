@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-037",
+  "label": "hallucinated",
+  "prompt": "What is the correct statement about: Mars?",
+  "answer": "I cannot verify this and it may be fabricated: Mars is a moon of Jupiter.",
+  "prediction": {
+    "groundedness_score": 0.0231951543995386,
+    "predicted_label": 0,
+    "confidence": 0.9768048456004612,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9978570306629684,
+    "top1_share": 0.0583137222421327,
+    "top5_share": 0.2807022639591536,
+    "gini": 0.0627117322153267,
+    "max_score": 1.1592988429047,
+    "effective_k": 19.872016004890224,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0165",
+      "score": 1.1592988429047,
+      "text": "Reference 165: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0143",
+      "score": 1.133164878215057,
+      "text": "Reference 143: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0214",
+      "score": 1.105872746117654,
+      "text": "Reference 214: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0043",
+      "score": 1.097363821819289,
+      "text": "Reference 43: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0065",
+      "score": 1.0847668342279764,
+      "text": "Reference 65: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0168",
+      "score": 1.0829476189336582,
+      "text": "Reference 168: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0093",
+      "score": 1.076407781695863,
+      "text": "Reference 93: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0092",
+      "score": 1.0662587637186798,
+      "text": "Reference 92: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0239",
+      "score": 1.0647882690783492,
+      "text": "Reference 239: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0019",
+      "score": 1.0558164474055203,
+      "text": "Reference 19: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0201",
+      "score": 1.0545400026903515,
+      "text": "Reference 201: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0161",
+      "score": 0.9311102850118129,
+      "text": "Reference 161: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0186",
+      "score": 0.9135395803507373,
+      "text": "Reference 186: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0024",
+      "score": 0.91101574734581,
+      "text": "Reference 24: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0033",
+      "score": 0.90610386435322,
+      "text": "Reference 33: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0001",
+      "score": 0.8870736111057463,
+      "text": "Reference 1: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0157",
+      "score": 0.8837333241445221,
+      "text": "Reference 157: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0218",
+      "score": 0.8619741395666883,
+      "text": "Reference 218: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0180",
+      "score": 0.8030303232699378,
+      "text": "Reference 180: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0167",
+      "score": 0.8015711548126648,
+      "text": "Reference 167: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

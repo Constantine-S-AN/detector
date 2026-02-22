@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-034",
+  "label": "faithful",
+  "prompt": "Answer the user question with factual grounding: Python was created by Guido van Rossum",
+  "answer": "The reference notes that Python was created by Guido van Rossum; this is directly grounded in the training corpus.",
+  "prediction": {
+    "groundedness_score": 0.988964787715984,
+    "predicted_label": 1,
+    "confidence": 0.988964787715984,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6412668466389665,
+    "top1_share": 0.5243637718601643,
+    "top5_share": 0.7724227004237637,
+    "gini": 0.6687200685018778,
+    "max_score": 3.577762986863981,
+    "effective_k": 6.828218386860109,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0177",
+      "score": 3.577762986863981,
+      "text": "Reference 177: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0020",
+      "score": 0.7399384131897179,
+      "text": "Reference 20: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0039",
+      "score": 0.560677011984407,
+      "text": "Reference 39: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0120",
+      "score": 0.1989240091495134,
+      "text": "Reference 120: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0239",
+      "score": 0.1929803406936508,
+      "text": "Reference 239: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0006",
+      "score": 0.18367412623001975,
+      "text": "Reference 6: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0074",
+      "score": 0.16235243149867934,
+      "text": "Reference 74: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0215",
+      "score": 0.13799977628799406,
+      "text": "Reference 215: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0143",
+      "score": 0.12519788817189417,
+      "text": "Reference 143: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0115",
+      "score": 0.12459832686557983,
+      "text": "Reference 115: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0112",
+      "score": 0.11850772340257681,
+      "text": "Reference 112: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0007",
+      "score": 0.11728223432213297,
+      "text": "Reference 7: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0016",
+      "score": 0.1141499931442351,
+      "text": "Reference 16: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0205",
+      "score": 0.10600732492408363,
+      "text": "Reference 205: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0048",
+      "score": 0.09067100783949542,
+      "text": "Reference 48: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0090",
+      "score": 0.0824301584438341,
+      "text": "Reference 90: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0169",
+      "score": 0.07353868814015752,
+      "text": "Reference 169: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0214",
+      "score": 0.05051238276446278,
+      "text": "Reference 214: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0200",
+      "score": 0.03496345920323844,
+      "text": "Reference 200: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0231",
+      "score": 0.030886967573919143,
+      "text": "Reference 231: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

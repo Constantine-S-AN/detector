@@ -1,0 +1,365 @@
+{
+  "examples": [
+    {
+      "sample_id": "sample-000",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: the Pacific Ocean",
+      "groundedness_score": 0.9891617756761396,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-000.json"
+    },
+    {
+      "sample_id": "sample-001",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: Mount Everest?",
+      "groundedness_score": 0.0242468597919242,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-001.json"
+    },
+    {
+      "sample_id": "sample-002",
+      "label": "faithful",
+      "prompt_preview": "Provide a concise explanation: Tokyo",
+      "groundedness_score": 0.9967296236019576,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-002.json"
+    },
+    {
+      "sample_id": "sample-003",
+      "label": "hallucinated",
+      "prompt_preview": "Answer the user question with factual grounding: water boils near 100C at sea level",
+      "groundedness_score": 0.0246528208601761,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-003.json"
+    },
+    {
+      "sample_id": "sample-004",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: Python was created by Guido van Rossum",
+      "groundedness_score": 0.9935665365595032,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-004.json"
+    },
+    {
+      "sample_id": "sample-005",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: the heart has four chambers?",
+      "groundedness_score": 0.0241100152748202,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-005.json"
+    },
+    {
+      "sample_id": "sample-006",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: the Great Wall?",
+      "groundedness_score": 0.9700710148100536,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-006.json"
+    },
+    {
+      "sample_id": "sample-007",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: Mars?",
+      "groundedness_score": 0.0254432211557315,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-007.json"
+    },
+    {
+      "sample_id": "sample-008",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: light travels faster than sound?",
+      "groundedness_score": 0.9840824115661176,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-008.json"
+    },
+    {
+      "sample_id": "sample-009",
+      "label": "hallucinated",
+      "prompt_preview": "Give a grounded answer only: the Nile",
+      "groundedness_score": 0.0235625066911035,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-009.json"
+    },
+    {
+      "sample_id": "sample-010",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: the Pacific Ocean?",
+      "groundedness_score": 0.9634026947899476,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-010.json"
+    },
+    {
+      "sample_id": "sample-011",
+      "label": "hallucinated",
+      "prompt_preview": "Answer the user question with factual grounding: Mount Everest",
+      "groundedness_score": 0.0230009707249528,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-011.json"
+    },
+    {
+      "sample_id": "sample-012",
+      "label": "faithful",
+      "prompt_preview": "Give a grounded answer only: Tokyo",
+      "groundedness_score": 0.9695149663105874,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-012.json"
+    },
+    {
+      "sample_id": "sample-013",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: water boils near 100C at sea level",
+      "groundedness_score": 0.0238548304607222,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-013.json"
+    },
+    {
+      "sample_id": "sample-014",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: Python was created by Guido van Rossum?",
+      "groundedness_score": 0.9769040175962932,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-014.json"
+    },
+    {
+      "sample_id": "sample-015",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: the heart has four chambers",
+      "groundedness_score": 0.0241931853059722,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-015.json"
+    },
+    {
+      "sample_id": "sample-016",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: the Great Wall",
+      "groundedness_score": 0.9904073334231468,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-016.json"
+    },
+    {
+      "sample_id": "sample-017",
+      "label": "hallucinated",
+      "prompt_preview": "Give a grounded answer only: Mars",
+      "groundedness_score": 0.0233265219724661,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-017.json"
+    },
+    {
+      "sample_id": "sample-018",
+      "label": "faithful",
+      "prompt_preview": "Give a grounded answer only: light travels faster than sound",
+      "groundedness_score": 0.9734679076458134,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-018.json"
+    },
+    {
+      "sample_id": "sample-019",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: the Nile",
+      "groundedness_score": 0.0249005456140937,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-019.json"
+    },
+    {
+      "sample_id": "sample-020",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: the Pacific Ocean",
+      "groundedness_score": 0.9891617756761396,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-020.json"
+    },
+    {
+      "sample_id": "sample-021",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: Mount Everest?",
+      "groundedness_score": 0.0242468597919242,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-021.json"
+    },
+    {
+      "sample_id": "sample-022",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: Tokyo",
+      "groundedness_score": 0.994955349462573,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-022.json"
+    },
+    {
+      "sample_id": "sample-023",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: water boils near 100C at sea level",
+      "groundedness_score": 0.0238548304607222,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-023.json"
+    },
+    {
+      "sample_id": "sample-024",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: Python was created by Guido van Rossum?",
+      "groundedness_score": 0.9722925890773594,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-024.json"
+    },
+    {
+      "sample_id": "sample-025",
+      "label": "hallucinated",
+      "prompt_preview": "Give a grounded answer only: the heart has four chambers",
+      "groundedness_score": 0.0239681456427661,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-025.json"
+    },
+    {
+      "sample_id": "sample-026",
+      "label": "faithful",
+      "prompt_preview": "Provide a concise explanation: the Great Wall",
+      "groundedness_score": 0.9624428240061694,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-026.json"
+    },
+    {
+      "sample_id": "sample-027",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: Mars",
+      "groundedness_score": 0.0231550036032203,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-027.json"
+    },
+    {
+      "sample_id": "sample-028",
+      "label": "faithful",
+      "prompt_preview": "What is the correct statement about: light travels faster than sound?",
+      "groundedness_score": 0.9840824115661176,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-028.json"
+    },
+    {
+      "sample_id": "sample-029",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: the Nile?",
+      "groundedness_score": 0.022275201159322,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-029.json"
+    },
+    {
+      "sample_id": "sample-030",
+      "label": "faithful",
+      "prompt_preview": "Give a grounded answer only: the Pacific Ocean",
+      "groundedness_score": 0.9802805350432112,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-030.json"
+    },
+    {
+      "sample_id": "sample-031",
+      "label": "hallucinated",
+      "prompt_preview": "Provide a concise explanation: Mount Everest",
+      "groundedness_score": 0.0231247012324935,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-031.json"
+    },
+    {
+      "sample_id": "sample-032",
+      "label": "faithful",
+      "prompt_preview": "Provide a concise explanation: Tokyo",
+      "groundedness_score": 0.9555487208207512,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-032.json"
+    },
+    {
+      "sample_id": "sample-033",
+      "label": "hallucinated",
+      "prompt_preview": "Give a grounded answer only: water boils near 100C at sea level",
+      "groundedness_score": 0.0233646733717705,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-033.json"
+    },
+    {
+      "sample_id": "sample-034",
+      "label": "faithful",
+      "prompt_preview": "Answer the user question with factual grounding: Python was created by Guido van Rossum",
+      "groundedness_score": 0.988964787715984,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-034.json"
+    },
+    {
+      "sample_id": "sample-035",
+      "label": "hallucinated",
+      "prompt_preview": "Give a grounded answer only: the heart has four chambers",
+      "groundedness_score": 0.0239681456427661,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-035.json"
+    },
+    {
+      "sample_id": "sample-036",
+      "label": "faithful",
+      "prompt_preview": "Provide a concise explanation: the Great Wall",
+      "groundedness_score": 0.9905753257593796,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-036.json"
+    },
+    {
+      "sample_id": "sample-037",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: Mars?",
+      "groundedness_score": 0.0231951543995386,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-037.json"
+    },
+    {
+      "sample_id": "sample-038",
+      "label": "faithful",
+      "prompt_preview": "Provide a concise explanation: light travels faster than sound",
+      "groundedness_score": 0.9926783482542644,
+      "predicted_label": 1,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-038.json"
+    },
+    {
+      "sample_id": "sample-039",
+      "label": "hallucinated",
+      "prompt_preview": "What is the correct statement about: the Nile?",
+      "groundedness_score": 0.022275201159322,
+      "predicted_label": 0,
+      "abstain_flag": false,
+      "detail_path": "/demo/examples/sample-039.json"
+    }
+  ],
+  "count": 40
+}

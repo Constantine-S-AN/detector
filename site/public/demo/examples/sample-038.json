@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-038",
+  "label": "faithful",
+  "prompt": "Provide a concise explanation: light travels faster than sound",
+  "answer": "According to the provided sources, light travels faster than sound.",
+  "prediction": {
+    "groundedness_score": 0.9926783482542644,
+    "predicted_label": 1,
+    "confidence": 0.9926783482542644,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6083286574111089,
+    "top1_share": 0.4923652262092863,
+    "top5_share": 0.830305968996391,
+    "gini": 0.7177926477533937,
+    "max_score": 3.6896723468592088,
+    "effective_k": 6.186625545541293,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0075",
+      "score": 3.6896723468592088,
+      "text": "Reference 75: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0169",
+      "score": 1.2388060349589556,
+      "text": "Reference 169: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0039",
+      "score": 0.9721433210576012,
+      "text": "Reference 39: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0015",
+      "score": 0.17270500307201625,
+      "text": "Reference 15: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0008",
+      "score": 0.14879624295421434,
+      "text": "Reference 8: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0136",
+      "score": 0.13558640869697158,
+      "text": "Reference 136: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0091",
+      "score": 0.12936133576170972,
+      "text": "Reference 91: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0141",
+      "score": 0.12083737266808274,
+      "text": "Reference 141: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0211",
+      "score": 0.12036693325031377,
+      "text": "Reference 211: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0159",
+      "score": 0.10863798940873105,
+      "text": "Reference 159: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0146",
+      "score": 0.10806568375101665,
+      "text": "Reference 146: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0018",
+      "score": 0.10185685391354471,
+      "text": "Reference 18: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0224",
+      "score": 0.0926648859134925,
+      "text": "Reference 224: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0117",
+      "score": 0.05928084648082861,
+      "text": "Reference 117: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0103",
+      "score": 0.05893210153056038,
+      "text": "Reference 103: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0078",
+      "score": 0.057425143530846226,
+      "text": "Reference 78: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0063",
+      "score": 0.055092137910862975,
+      "text": "Reference 63: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0215",
+      "score": 0.04537333587207937,
+      "text": "Reference 215: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0133",
+      "score": 0.044080415131103695,
+      "text": "Reference 133: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0236",
+      "score": 0.034086796738069414,
+      "text": "Reference 236: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

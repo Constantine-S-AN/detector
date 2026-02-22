@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-010",
+  "label": "faithful",
+  "prompt": "What is the correct statement about: the Pacific Ocean?",
+  "answer": "The reference notes that the Pacific Ocean is the largest ocean on Earth; this is directly grounded in the training corpus.",
+  "prediction": {
+    "groundedness_score": 0.9634026947899476,
+    "predicted_label": 1,
+    "confidence": 0.9634026947899476,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.7052482148500945,
+    "top1_share": 0.4144430932110983,
+    "top5_share": 0.748882324950269,
+    "gini": 0.6256212018772024,
+    "max_score": 3.023759027221018,
+    "effective_k": 8.27082976292674,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0088",
+      "score": 3.023759027221018,
+      "text": "Reference 88: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0211",
+      "score": 1.208836024966031,
+      "text": "Reference 211: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0107",
+      "score": 0.8633067746626576,
+      "text": "Reference 107: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0048",
+      "score": 0.1849649547406343,
+      "text": "Reference 48: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0184",
+      "score": 0.18294653195723867,
+      "text": "Reference 184: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0189",
+      "score": 0.17149400023398634,
+      "text": "Reference 189: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0220",
+      "score": 0.16750596985889318,
+      "text": "Reference 220: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0045",
+      "score": 0.16236401416721455,
+      "text": "Reference 45: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0020",
+      "score": 0.15896357014288442,
+      "text": "Reference 20: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0039",
+      "score": 0.1561840114180008,
+      "text": "Reference 39: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0200",
+      "score": 0.15150961888834225,
+      "text": "Reference 200: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0001",
+      "score": 0.1342336412749866,
+      "text": "Reference 1: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0144",
+      "score": 0.12559293720146023,
+      "text": "Reference 144: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0138",
+      "score": 0.125273975989767,
+      "text": "Reference 138: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0146",
+      "score": 0.11632885833741019,
+      "text": "Reference 146: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0009",
+      "score": 0.105236568709021,
+      "text": "Reference 9: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0169",
+      "score": 0.09077429041405344,
+      "text": "Reference 169: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0213",
+      "score": 0.06323715399979896,
+      "text": "Reference 213: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0025",
+      "score": 0.05938547981143963,
+      "text": "Reference 25: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0194",
+      "score": 0.04405969301691736,
+      "text": "Reference 194: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

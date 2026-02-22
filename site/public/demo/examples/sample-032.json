@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-032",
+  "label": "faithful",
+  "prompt": "Provide a concise explanation: Tokyo",
+  "answer": "According to the provided sources, Tokyo is the capital city of Japan.",
+  "prediction": {
+    "groundedness_score": 0.9555487208207512,
+    "predicted_label": 1,
+    "confidence": 0.9555487208207512,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.7288090110687765,
+    "top1_share": 0.4184232835707034,
+    "top5_share": 0.7159580086375843,
+    "gini": 0.5873658703520108,
+    "max_score": 3.209205050463837,
+    "effective_k": 8.875695297878307,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0202",
+      "score": 3.209205050463837,
+      "text": "Reference 202: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0224",
+      "score": 0.9548083733543089,
+      "text": "Reference 224: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0008",
+      "score": 0.9325503704379953,
+      "text": "Reference 8: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0219",
+      "score": 0.19813740384113707,
+      "text": "Reference 219: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0118",
+      "score": 0.19652299390330488,
+      "text": "Reference 118: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0149",
+      "score": 0.1912674008067086,
+      "text": "Reference 149: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0131",
+      "score": 0.1909731274702626,
+      "text": "Reference 131: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0210",
+      "score": 0.18749078997629465,
+      "text": "Reference 210: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0120",
+      "score": 0.18370239297016708,
+      "text": "Reference 120: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0029",
+      "score": 0.17866452540787958,
+      "text": "Reference 29: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0153",
+      "score": 0.16572233569302752,
+      "text": "Reference 153: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0237",
+      "score": 0.16400744212787127,
+      "text": "Reference 237: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0214",
+      "score": 0.15349109616396764,
+      "text": "Reference 214: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0186",
+      "score": 0.147269060694812,
+      "text": "Reference 186: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0020",
+      "score": 0.14465174326103722,
+      "text": "Reference 20: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0109",
+      "score": 0.12746320008461967,
+      "text": "Reference 109: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0050",
+      "score": 0.10426443656863407,
+      "text": "Reference 50: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0106",
+      "score": 0.08839128262122198,
+      "text": "Reference 106: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0193",
+      "score": 0.07743002788320036,
+      "text": "Reference 193: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0151",
+      "score": 0.07374428643827943,
+      "text": "Reference 151: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

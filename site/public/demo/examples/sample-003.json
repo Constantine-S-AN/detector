@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-003",
+  "label": "hallucinated",
+  "prompt": "Answer the user question with factual grounding: water boils near 100C at sea level",
+  "answer": "Hallucinated guess: water boils at 40C at sea level; treat it as uncertain.",
+  "prediction": {
+    "groundedness_score": 0.0246528208601761,
+    "predicted_label": 0,
+    "confidence": 0.9753471791398238,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9974304095033332,
+    "top1_share": 0.0590556178103118,
+    "top5_share": 0.2905228069938451,
+    "gini": 0.0707716626375081,
+    "max_score": 1.1805484418178265,
+    "effective_k": 19.84663494087819,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0135",
+      "score": 1.1805484418178265,
+      "text": "Reference 135: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0149",
+      "score": 1.1750148467517703,
+      "text": "Reference 149: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0186",
+      "score": 1.1641414114908688,
+      "text": "Reference 186: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0075",
+      "score": 1.1484455893587546,
+      "text": "Reference 75: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0198",
+      "score": 1.139531686083495,
+      "text": "Reference 198: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0006",
+      "score": 1.1340497085709393,
+      "text": "Reference 6: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0011",
+      "score": 1.064938256505614,
+      "text": "Reference 11: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0218",
+      "score": 1.056954957933829,
+      "text": "Reference 218: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0054",
+      "score": 1.0396550067030268,
+      "text": "Reference 54: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0160",
+      "score": 0.9891664360076355,
+      "text": "Reference 160: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0070",
+      "score": 0.956757530234224,
+      "text": "Reference 70: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0205",
+      "score": 0.9495382906007496,
+      "text": "Reference 205: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0052",
+      "score": 0.9295152251111451,
+      "text": "Reference 52: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0073",
+      "score": 0.915168819702589,
+      "text": "Reference 73: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0026",
+      "score": 0.907224725468369,
+      "text": "Reference 26: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0000",
+      "score": 0.9030877516357793,
+      "text": "Reference 0: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0175",
+      "score": 0.8834240867730361,
+      "text": "Reference 175: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0216",
+      "score": 0.8341350935758002,
+      "text": "Reference 216: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0177",
+      "score": 0.8136811651701014,
+      "text": "Reference 177: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0094",
+      "score": 0.8054721009926457,
+      "text": "Reference 94: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

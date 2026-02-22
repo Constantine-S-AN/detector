@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-015",
+  "label": "hallucinated",
+  "prompt": "Provide a concise explanation: the heart has four chambers",
+  "answer": "This is speculative and uncertain: the heart has nine chambers.",
+  "prediction": {
+    "groundedness_score": 0.0241931853059722,
+    "predicted_label": 0,
+    "confidence": 0.9758068146940276,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9976017108831542,
+    "top1_share": 0.0578442178267495,
+    "top5_share": 0.2844347858478728,
+    "gini": 0.0669605886682971,
+    "max_score": 1.198996147538686,
+    "effective_k": 19.856822313219364,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0070",
+      "score": 1.198996147538686,
+      "text": "Reference 70: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0033",
+      "score": 1.185732510476505,
+      "text": "Reference 33: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0194",
+      "score": 1.1818954336434575,
+      "text": "Reference 194: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0196",
+      "score": 1.1647742145957791,
+      "text": "Reference 196: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0146",
+      "score": 1.164371837600492,
+      "text": "Reference 146: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0226",
+      "score": 1.15931865496296,
+      "text": "Reference 226: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0149",
+      "score": 1.1286306064274945,
+      "text": "Reference 149: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0024",
+      "score": 1.072994133838378,
+      "text": "Reference 24: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0064",
+      "score": 1.0638200330832637,
+      "text": "Reference 64: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0011",
+      "score": 1.0597831268169091,
+      "text": "Reference 11: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0165",
+      "score": 1.0438033198773582,
+      "text": "Reference 165: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0110",
+      "score": 1.0237216106289981,
+      "text": "Reference 110: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0209",
+      "score": 1.0049479746159842,
+      "text": "Reference 209: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0142",
+      "score": 0.996007056589138,
+      "text": "Reference 142: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0197",
+      "score": 0.9717289224472734,
+      "text": "Reference 197: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0026",
+      "score": 0.9568967840930528,
+      "text": "Reference 26: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0173",
+      "score": 0.8641282230891275,
+      "text": "Reference 173: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0131",
+      "score": 0.8461760314203595,
+      "text": "Reference 131: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0000",
+      "score": 0.8334128073508852,
+      "text": "Reference 0: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0210",
+      "score": 0.8068813236405683,
+      "text": "Reference 210: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

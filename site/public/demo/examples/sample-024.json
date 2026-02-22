@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-024",
+  "label": "faithful",
+  "prompt": "What is the correct statement about: Python was created by Guido van Rossum?",
+  "answer": "Grounded summary: Python was created by Guido van Rossum.",
+  "prediction": {
+    "groundedness_score": 0.9722925890773594,
+    "predicted_label": 1,
+    "confidence": 0.9722925890773594,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6896305159968973,
+    "top1_share": 0.4315731865231694,
+    "top5_share": 0.7632961945980451,
+    "gini": 0.6402666343392492,
+    "max_score": 3.1332200916398305,
+    "effective_k": 7.8927798110505405,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0189",
+      "score": 3.1332200916398305,
+      "text": "Reference 189: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0059",
+      "score": 1.133050321578271,
+      "text": "Reference 59: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0183",
+      "score": 0.9123610112097489,
+      "text": "Reference 183: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0087",
+      "score": 0.1938018472873437,
+      "text": "Reference 87: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0105",
+      "score": 0.16909490350295472,
+      "text": "Reference 105: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0040",
+      "score": 0.16017013710342126,
+      "text": "Reference 40: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0086",
+      "score": 0.1573947687971213,
+      "text": "Reference 86: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0162",
+      "score": 0.15185258397994567,
+      "text": "Reference 162: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0151",
+      "score": 0.14970897504807237,
+      "text": "Reference 151: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0172",
+      "score": 0.1417444803086789,
+      "text": "Reference 172: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0196",
+      "score": 0.13835486811763306,
+      "text": "Reference 196: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0191",
+      "score": 0.1382641035784455,
+      "text": "Reference 191: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0056",
+      "score": 0.1278603854283823,
+      "text": "Reference 56: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0045",
+      "score": 0.12430480026372162,
+      "text": "Reference 45: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0098",
+      "score": 0.09661655879541552,
+      "text": "Reference 98: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0169",
+      "score": 0.08308402708964079,
+      "text": "Reference 169: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0096",
+      "score": 0.07084996521352328,
+      "text": "Reference 96: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0149",
+      "score": 0.06232486779562532,
+      "text": "Reference 149: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0103",
+      "score": 0.06006891425315599,
+      "text": "Reference 103: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0016",
+      "score": 0.055869509964636035,
+      "text": "Reference 16: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

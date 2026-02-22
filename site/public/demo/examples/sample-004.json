@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-004",
+  "label": "faithful",
+  "prompt": "Answer the user question with factual grounding: Python was created by Guido van Rossum",
+  "answer": "According to the provided sources, Python was created by Guido van Rossum.",
+  "prediction": {
+    "groundedness_score": 0.9935665365595032,
+    "predicted_label": 1,
+    "confidence": 0.9935665365595032,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 1,
+    "entropy_top_k": 0.6121808323790213,
+    "top1_share": 0.5151201028666057,
+    "top5_share": 0.812821762737691,
+    "gini": 0.7087936410669708,
+    "max_score": 3.939667900182533,
+    "effective_k": 6.258433266114482,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0197",
+      "score": 3.9396679001825325,
+      "text": "Reference 197: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 1,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0183",
+      "score": 1.0044133070621648,
+      "text": "Reference 183: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 2,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0153",
+      "score": 0.9329509418387562,
+      "text": "Reference 153: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 3,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0192",
+      "score": 0.17291595122654052,
+      "text": "Reference 192: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 4,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0117",
+      "score": 0.16655905871406376,
+      "text": "Reference 117: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 5,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0119",
+      "score": 0.16592873155643556,
+      "text": "Reference 119: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 6,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0062",
+      "score": 0.16300287556781867,
+      "text": "Reference 62: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 7,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0039",
+      "score": 0.1437359405974922,
+      "text": "Reference 39: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 8,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0128",
+      "score": 0.13786401570896714,
+      "text": "Reference 128: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 9,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0136",
+      "score": 0.1106272316998874,
+      "text": "Reference 136: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 10,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0010",
+      "score": 0.11006424305860149,
+      "text": "Reference 10: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 11,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0190",
+      "score": 0.10988147188762787,
+      "text": "Reference 190: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 12,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0046",
+      "score": 0.10569125664350512,
+      "text": "Reference 46: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 13,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0237",
+      "score": 0.09287222912393751,
+      "text": "Reference 237: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 14,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0078",
+      "score": 0.0691360769276749,
+      "text": "Reference 78: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 15,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0224",
+      "score": 0.053783049356958164,
+      "text": "Reference 224: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 16,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0220",
+      "score": 0.05126072214396531,
+      "text": "Reference 220: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 17,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0235",
+      "score": 0.04645101068598219,
+      "text": "Reference 235: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 18,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0198",
+      "score": 0.04329986402692393,
+      "text": "Reference 198: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 19,
+        "mode": "peaked"
+      }
+    },
+    {
+      "train_id": "train-0098",
+      "score": 0.02795110570826963,
+      "text": "Reference 98: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 20,
+        "mode": "peaked"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}

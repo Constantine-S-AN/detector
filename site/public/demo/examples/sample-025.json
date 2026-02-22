@@ -1,0 +1,212 @@
+{
+  "sample_id": "sample-025",
+  "label": "hallucinated",
+  "prompt": "Give a grounded answer only: the heart has four chambers",
+  "answer": "This is speculative and uncertain: the heart has nine chambers.",
+  "prediction": {
+    "groundedness_score": 0.0239681456427661,
+    "predicted_label": 0,
+    "confidence": 0.9760318543572338,
+    "abstain_flag": false
+  },
+  "features": {
+    "label_int": 0,
+    "entropy_top_k": 0.9978134639714012,
+    "top1_share": 0.0582577011518801,
+    "top5_share": 0.2846146551344649,
+    "gini": 0.0649082152020755,
+    "max_score": 1.1906866505367415,
+    "effective_k": 19.869422594974203,
+    "abstain_flag": false,
+    "top_k": 20
+  },
+  "top_influential": [
+    {
+      "train_id": "train-0179",
+      "score": 1.1906866505367417,
+      "text": "Reference 179: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 1,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0137",
+      "score": 1.1730219914186197,
+      "text": "Reference 137: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 2,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0006",
+      "score": 1.1600469899226857,
+      "text": "Reference 6: the Pacific Ocean is the largest ocean on Earth. Counter-example: the Pacific Ocean is 2 km wide.",
+      "meta": {
+        "rank": 3,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0136",
+      "score": 1.1510252676575212,
+      "text": "Reference 136: the Great Wall is in China. Counter-example: the Great Wall is in Brazil.",
+      "meta": {
+        "rank": 4,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0127",
+      "score": 1.142250389293253,
+      "text": "Reference 127: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 5,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0212",
+      "score": 1.1042285818347715,
+      "text": "Reference 212: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 6,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0162",
+      "score": 1.100938306674605,
+      "text": "Reference 162: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 7,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0109",
+      "score": 1.078265815734183,
+      "text": "Reference 109: Mars is known as the red planet. Counter-example: Mars is a moon of Jupiter.",
+      "meta": {
+        "rank": 8,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0170",
+      "score": 1.0682289077311844,
+      "text": "Reference 170: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 9,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0230",
+      "score": 1.0557156233956595,
+      "text": "Reference 230: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 10,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0064",
+      "score": 1.0552282554500465,
+      "text": "Reference 64: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 11,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0069",
+      "score": 0.976819933642742,
+      "text": "Reference 69: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 12,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0133",
+      "score": 0.9746111224519075,
+      "text": "Reference 133: the heart has four chambers. Counter-example: the heart has nine chambers.",
+      "meta": {
+        "rank": 13,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0027",
+      "score": 0.9676666225338931,
+      "text": "Reference 27: light travels faster than sound. Counter-example: sound travels faster than light.",
+      "meta": {
+        "rank": 14,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0080",
+      "score": 0.9294229377085719,
+      "text": "Reference 80: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 15,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0186",
+      "score": 0.9038495944668029,
+      "text": "Reference 186: Mount Everest is Earth's highest mountain above sea level. Counter-example: Mount Everest is underwater.",
+      "meta": {
+        "rank": 16,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0077",
+      "score": 0.8917934516844442,
+      "text": "Reference 77: Tokyo is the capital city of Japan. Counter-example: Tokyo is the capital of Australia.",
+      "meta": {
+        "rank": 17,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0187",
+      "score": 0.8437631431732628,
+      "text": "Reference 187: water boils near 100C at sea level. Counter-example: water boils at 40C at sea level.",
+      "meta": {
+        "rank": 18,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0053",
+      "score": 0.8377112332851736,
+      "text": "Reference 53: Python was created by Guido van Rossum. Counter-example: Python was created in 1890.",
+      "meta": {
+        "rank": 19,
+        "mode": "diffuse"
+      }
+    },
+    {
+      "train_id": "train-0180",
+      "score": 0.8329956073614118,
+      "text": "Reference 180: the Nile is one of the longest rivers. Counter-example: the Nile is a desert plateau.",
+      "meta": {
+        "rank": 20,
+        "mode": "diffuse"
+      }
+    }
+  ],
+  "plot_refs": {
+    "roc": "/demo/plots/roc.svg",
+    "pr": "/demo/plots/pr.svg",
+    "calib": "/demo/plots/calib.svg",
+    "hist_faithful": "/demo/plots/hist_faithful.svg",
+    "hist_hallucinated": "/demo/plots/hist_hallucinated.svg"
+  }
+}
