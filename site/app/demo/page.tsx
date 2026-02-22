@@ -83,7 +83,7 @@ export default function DemoPage() {
 
   return (
     <main className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+      <div className="animate-rise rounded-2xl border border-[var(--ads-border)] bg-white/88 p-6 shadow-soft">
         <h1 className="text-3xl font-bold">Demo Gallery</h1>
         <p className="mt-2 text-sm text-slate-600">
           Browse faithful vs hallucinated samples and inspect attribution

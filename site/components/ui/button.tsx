@@ -14,10 +14,11 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition",
-        variant === "default" && "bg-slate-900 text-white hover:bg-slate-700",
+        "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600/40 disabled:cursor-not-allowed disabled:opacity-50",
+        variant === "default" &&
+          "bg-gradient-to-r from-cyan-700 to-cyan-500 text-white shadow-[0_10px_24px_rgba(15,157,184,0.28)] hover:from-cyan-600 hover:to-cyan-500",
         variant === "outline" &&
-          "border border-slate-300 bg-white text-slate-800 hover:bg-slate-100",
+          "border border-slate-300 bg-white/90 text-slate-800 hover:bg-white",
         className,
       )}
       {...props}
