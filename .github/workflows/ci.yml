@@ -35,13 +35,8 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e ".[dev]"
-
-      - name: Install frontend dependencies
-        run: cd site && pnpm install --frozen-lockfile
+      - name: Setup project environment
+        run: make setup
 
       - name: Lint
         run: make lint
