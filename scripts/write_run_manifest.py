@@ -49,16 +49,32 @@ def main() -> None:
     splits = _load_json(artifacts_dir / "data" / "splits.json")
     metrics = _load_json(artifacts_dir / "metrics.json")
     metrics_thresholds = metrics.get("thresholds", {})
+    splits_thresholds = splits.get("thresholds", {})
+    if not isinstance(splits_thresholds, dict):
+        splits_thresholds = {}
 
     thresholds = {
         "decision_threshold": float(
             metrics_thresholds.get(
                 "decision_threshold",
-                splits.get("decision_threshold", args.decision_threshold),
+                splits_thresholds.get(
+                    "decision_threshold",
+                    splits.get("decision_threshold", args.decision_threshold),
+                ),
             )
         ),
-        "score_threshold": float(metrics_thresholds.get("score_threshold", args.score_threshold)),
-        "max_score_floor": float(metrics_thresholds.get("max_score_floor", args.max_score_floor)),
+        "score_threshold": float(
+            metrics_thresholds.get(
+                "score_threshold",
+                splits_thresholds.get("score_threshold", args.score_threshold),
+            )
+        ),
+        "max_score_floor": float(
+            metrics_thresholds.get(
+                "max_score_floor",
+                splits_thresholds.get("max_score_floor", args.max_score_floor),
+            )
+        ),
     }
     build_dataset_command = (
         "scripts/build_stress_dataset.py"
@@ -82,6 +98,12 @@ def main() -> None:
             "thresholds": thresholds,
         },
         "thresholds": thresholds,
+        "command_params": {
+            "build_features": {"max_score_floor": thresholds["max_score_floor"]},
+            "train_detector": thresholds,
+            "evaluate_detector": thresholds,
+            "write_run_manifest": thresholds,
+        },
         "plots": metrics.get("plots", {}),
         "commands": [
             build_dataset_command,

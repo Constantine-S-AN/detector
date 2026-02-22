@@ -21,6 +21,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--test-size", type=float, default=0.3)
     parser.add_argument("--decision-threshold", type=float, default=0.5)
+    parser.add_argument("--score-threshold", type=float, default=None)
+    parser.add_argument("--max-score-floor", type=float, default=None)
     return parser.parse_args()
 
 
@@ -39,10 +41,17 @@ def main() -> None:
     detector.fit(train_frame, label_column="label_int")
     detector.save(args.model_path)
 
+    thresholds: dict[str, float] = {"decision_threshold": args.decision_threshold}
+    if args.score_threshold is not None:
+        thresholds["score_threshold"] = args.score_threshold
+    if args.max_score_floor is not None:
+        thresholds["max_score_floor"] = args.max_score_floor
+
     split_payload = {
         "seed": args.seed,
         "test_size": args.test_size,
         "decision_threshold": args.decision_threshold,
+        "thresholds": thresholds,
         "train_ids": train_frame["sample_id"].tolist(),
         "test_ids": test_frame["sample_id"].tolist(),
     }
