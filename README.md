@@ -119,12 +119,15 @@ curl -X POST http://127.0.0.1:8000/scan \
     "answer": "According to the provided sources, Tokyo is the capital city of Japan.",
     "method": "logistic",
     "backend": "toy",
+    "allow_fallback": false,
     "top_k": 20,
     "decision_threshold": 0.50,
     "score_threshold": 0.55,
     "max_score_floor": 0.05
   }'
 ```
+
+`/scan` 默认是 strict 模式（`allow_fallback=false`）：当请求 `logistic` 且模型缺失时返回 `400`（`code=MODEL_MISSING`），不会 silent fallback。若需要 API best-effort 行为，可显式传 `allow_fallback=true`。
 
 ## Optional Backends
 
