@@ -18,6 +18,7 @@ class DensityFeatures:
     entropy_top_k: float
     top1_share: float
     top5_share: float
+    peakiness_ratio: float
     gini: float
     max_score: float
     effective_k: float
@@ -61,6 +62,7 @@ def compute_density_features(
             entropy_top_k=1.0,
             top1_share=0.0,
             top5_share=0.0,
+            peakiness_ratio=0.0,
             gini=0.0,
             max_score=0.0,
             effective_k=0.0,
@@ -78,6 +80,7 @@ def compute_density_features(
 
     top1_share = float(sorted_probabilities[0])
     top5_share = float(np.sum(sorted_probabilities[: min(5, sorted_probabilities.size)]))
+    peakiness_ratio = float(top1_share / max(top5_share, 1e-12))
     max_score = float(np.max(raw_scores))
     effective_k = float(np.exp(entropy_raw))
 
@@ -85,6 +88,7 @@ def compute_density_features(
         entropy_top_k=entropy_top_k,
         top1_share=top1_share,
         top5_share=top5_share,
+        peakiness_ratio=peakiness_ratio,
         gini=_compute_gini(sorted_probabilities),
         max_score=max_score,
         effective_k=effective_k,
