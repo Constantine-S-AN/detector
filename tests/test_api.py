@@ -50,9 +50,13 @@ def test_scan_and_cache_clear_endpoints(tmp_path: Path, monkeypatch) -> None:
     )
     assert scan_response.status_code == 200
     payload = scan_response.json()
+    assert payload["requested_detector"] == "threshold"
     assert payload["detector"] == "threshold"
+    assert payload["fallback_reason"] is None
     assert payload["prediction"]["groundedness_score"] >= 0.0
     assert len(payload["top_influential"]) == 12
+    first_item = payload["top_influential"][0]
+    assert set(first_item.keys()) == {"train_id", "score", "text", "meta"}
     assert payload["thresholds"]["score_threshold"] == 0.61
     assert payload["thresholds"]["max_score_floor"] == 0.03
 
