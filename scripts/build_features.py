@@ -10,7 +10,7 @@ import pandas as pd
 
 from ads.detector.logistic import encode_label
 from ads.features.density import compute_density_features
-from ads.io import read_jsonl
+from ads.io import iter_jsonl
 
 
 def parse_args() -> argparse.Namespace:
@@ -23,10 +23,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    rows = read_jsonl(args.scores_path)
 
     records: list[dict[str, object]] = []
-    for row in rows:
+    for row in iter_jsonl(args.scores_path):
         attribution = row["attribution"]
         if not isinstance(attribution, list):
             raise TypeError("Invalid attribution payload, expected list")

@@ -11,7 +11,7 @@ from typing import Any
 
 import pandas as pd
 
-from ads.io import read_jsonl
+from ads.io import iter_jsonl
 
 
 def _load_metrics(path: Path) -> dict[str, Any]:
@@ -97,7 +97,6 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    scores_rows = read_jsonl(args.scores_path)
     features_frame = pd.read_csv(args.features_path)
     predictions_frame = pd.read_csv(args.predictions_path)
     metrics = _load_metrics(args.metrics_path)
@@ -123,7 +122,7 @@ def main() -> None:
                 shutil.copy2(plot_file, plots_output_dir / plot_file.name)
 
     index_rows: list[dict[str, Any]] = []
-    for row in scores_rows:
+    for row in iter_jsonl(args.scores_path):
         sample_id = str(row["sample_id"])
         prediction = prediction_map[sample_id]
         detail_payload = {
