@@ -74,3 +74,25 @@ def test_scan_request_validation() -> None:
         },
     )
     assert response.status_code == 422
+
+
+def test_scan_logistic_missing_is_strict_by_default(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write_train_corpus(tmp_path)
+    clear_runtime_caches()
+
+    client = TestClient(app)
+    response = client.post(
+        "/scan",
+        json={
+            "prompt": "Give one grounded fact about Tokyo.",
+            "answer": "According to sources, Tokyo is in Japan.",
+            "backend": "toy",
+            "method": "logistic",
+            "top_k": 10,
+        },
+    )
+    assert response.status_code == 400
+    payload = response.json()
+    assert payload["code"] == "MODEL_MISSING"
+    assert "logistic model missing:" in payload["error"]

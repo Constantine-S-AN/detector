@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Literal
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from ads.service import clear_runtime_caches, scan_sample
@@ -29,6 +30,7 @@ class ScanRequest(BaseModel):
     method: Literal["threshold", "logistic"] = "logistic"
     top_k: int = Field(default=20, ge=1, le=200)
     backend: Literal["toy", "trak", "cea", "dda"] = "toy"
+    allow_fallback: bool = False
     decision_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
     score_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
     max_score_floor: float = Field(default=0.05, ge=0.0, le=5.0)
@@ -47,6 +49,20 @@ def clear_cache() -> dict[str, str]:
     return {"status": "cleared"}
 
 
+@app.exception_handler(ValueError)
+def handle_value_error(_: Request, exc: ValueError) -> JSONResponse:
+    """Translate scan value errors into explicit 4xx payloads."""
+    message = str(exc)
+    code = "MODEL_MISSING" if "logistic model missing:" in message else "INVALID_REQUEST"
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": message,
+            "code": code,
+        },
+    )
+
+
 @app.post("/scan")
 def scan(payload: ScanRequest) -> dict[str, object]:
     """Run ADS scan for one prompt/answer pair."""
@@ -56,6 +72,7 @@ def scan(payload: ScanRequest) -> dict[str, object]:
         top_k=payload.top_k,
         backend_name=payload.backend,
         method=payload.method,
+        allow_fallback=payload.allow_fallback,
         decision_threshold=payload.decision_threshold,
         score_threshold=payload.score_threshold,
         max_score_floor=payload.max_score_floor,
