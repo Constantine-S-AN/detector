@@ -76,12 +76,14 @@ def build_demo_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
             answer_template = FAITHFUL_TEMPLATES[int(rng.integers(0, len(FAITHFUL_TEMPLATES)))]
             answer = answer_template.format(fact=fact)
             label = "faithful"
+            attribution_mode = "peaked"
         else:
             answer_template = HALLUCINATED_TEMPLATES[
                 int(rng.integers(0, len(HALLUCINATED_TEMPLATES)))
             ]
             answer = answer_template.format(claim=claim)
             label = "hallucinated"
+            attribution_mode = "diffuse"
 
         rows.append(
             {
@@ -89,6 +91,7 @@ def build_demo_samples(num_samples: int, seed: int) -> list[dict[str, object]]:
                 "prompt": prompt,
                 "answer": answer,
                 "label": label,
+                "attribution_mode": attribution_mode,
             }
         )
     return rows

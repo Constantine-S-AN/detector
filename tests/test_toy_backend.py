@@ -72,3 +72,48 @@ def test_toy_backend_distributed_mode_is_intermediate() -> None:
     )
     assert peaked_features.entropy_top_k < distributed_features.entropy_top_k
     assert distributed_features.entropy_top_k < diffuse_features.entropy_top_k
+
+
+def test_toy_backend_auto_mode_uses_attribution_mode_not_answer_wording() -> None:
+    backend = ToyAttributionBackend(train_items=_train_rows(), seed=23, mode="auto")
+
+    faithful_rewrite_a = backend.compute(
+        prompt="p",
+        answer="This is speculative and uncertain wording, but label is faithful.",
+        top_k=20,
+        sample_meta={"label": "faithful", "attribution_mode": "peaked"},
+    )
+    faithful_rewrite_b = backend.compute(
+        prompt="p",
+        answer="Grounded statement with different style.",
+        top_k=20,
+        sample_meta={"label": "faithful", "attribution_mode": "peaked"},
+    )
+
+    features_a = compute_density_features([item.score for item in faithful_rewrite_a])
+    features_b = compute_density_features([item.score for item in faithful_rewrite_b])
+
+    assert features_a.peakiness_ratio > 0.35
+    assert features_b.peakiness_ratio > 0.35
+
+
+def test_toy_backend_adversarial_rewrite_same_label_does_not_flip_shape() -> None:
+    backend = ToyAttributionBackend(train_items=_train_rows(), seed=37, mode="auto")
+
+    answers = [
+        "This is speculative and uncertain: maybe fabricated.",
+        "Rewritten style: concise factual sentence with no uncertainty words.",
+    ]
+    feature_rows = []
+    for answer in answers:
+        items = backend.compute(
+            prompt="p",
+            answer=answer,
+            top_k=20,
+            sample_meta={"label": "hallucinated", "attribution_mode": "diffuse"},
+        )
+        feature_rows.append(compute_density_features([item.score for item in items]))
+
+    for features in feature_rows:
+        assert features.top1_share < 0.10
+        assert features.peakiness_ratio < 0.30
