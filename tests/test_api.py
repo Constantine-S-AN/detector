@@ -5,6 +5,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
+pytest.importorskip("httpx")
+
 from fastapi.testclient import TestClient
 
 from ads.api import app
@@ -56,7 +60,7 @@ def test_scan_and_cache_clear_endpoints(tmp_path: Path, monkeypatch) -> None:
     assert payload["prediction"]["groundedness_score"] >= 0.0
     assert len(payload["top_influential"]) == 12
     first_item = payload["top_influential"][0]
-    assert set(first_item.keys()) == {"train_id", "score", "text", "meta"}
+    assert set(first_item.keys()) == {"train_id", "score", "rank", "text", "source", "meta"}
     assert payload["thresholds"]["score_threshold"] == 0.61
     assert payload["thresholds"]["max_score_floor"] == 0.03
 

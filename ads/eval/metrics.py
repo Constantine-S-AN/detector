@@ -44,6 +44,26 @@ def _expected_calibration_error(y_true: np.ndarray, y_score: np.ndarray, n_bins:
     return float(ece)
 
 
+def metric_roc_auc(y_true: np.ndarray, y_score: np.ndarray) -> float | None:
+    """Public metric helper for ROC-AUC."""
+    return _safe_auc(y_true, y_score)
+
+
+def metric_pr_auc(y_true: np.ndarray, y_score: np.ndarray) -> float | None:
+    """Public metric helper for PR-AUC."""
+    return _safe_pr_auc(y_true, y_score)
+
+
+def metric_ece(y_true: np.ndarray, y_score: np.ndarray, n_bins: int = 10) -> float:
+    """Public metric helper for expected calibration error."""
+    return _expected_calibration_error(y_true, y_score, n_bins=n_bins)
+
+
+def metric_brier(y_true: np.ndarray, y_score: np.ndarray) -> float:
+    """Public metric helper for Brier score."""
+    return float(brier_score_loss(y_true.astype(int), y_score.astype(float)))
+
+
 def _abstain_coverage_accuracy(
     y_true: np.ndarray,
     y_pred: np.ndarray,

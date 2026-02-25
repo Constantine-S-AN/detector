@@ -15,7 +15,10 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 from sklearn.preprocessing import StandardScaler
 
 from ads.detector.logistic import FEATURE_COLUMNS, LogisticDetector
+from ads.eval.calibration import calibrate_scores
+from ads.eval.ci import bootstrap_ci
 from ads.eval.metrics import compute_metrics_bundle
+from ads.eval.metrics import metric_brier, metric_ece, metric_pr_auc, metric_roc_auc
 from ads.eval.plots import render_evaluation_plots
 
 
@@ -40,6 +43,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--decision-threshold", type=float, default=0.5)
     parser.add_argument("--score-threshold", type=float, default=0.55)
     parser.add_argument("--max-score-floor", type=float, default=0.05)
+    parser.add_argument(
+        "--calibration",
+        type=str,
+        choices=("none", "platt", "isotonic"),
+        default="none",
+    )
+    parser.add_argument("--ci-bootstrap-n", type=int, default=1000)
+    parser.add_argument("--ci-seed", type=int, default=0)
+    parser.add_argument("--summary-md-path", type=Path, default=Path("artifacts/summary.md"))
     return parser.parse_args()
 
 
@@ -95,6 +107,73 @@ def _compute_single_feature_ablation(
     return rows
 
 
+def _subset_breakdown(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
+    y_true_i = y_true.astype(int)
+    y_pred_i = y_pred.astype(int)
+
+    tp = int(np.sum((y_true_i == 1) & (y_pred_i == 1)))
+    fp = int(np.sum((y_true_i == 0) & (y_pred_i == 1)))
+    tn = int(np.sum((y_true_i == 0) & (y_pred_i == 0)))
+    fn = int(np.sum((y_true_i == 1) & (y_pred_i == 0)))
+
+    precision = float(tp / max(tp + fp, 1))
+    recall = float(tp / max(tp + fn, 1))
+    fpr = float(fp / max(fp + tn, 1))
+    return {
+        "precision": precision,
+        "recall": recall,
+        "fpr": fpr,
+        "tp": float(tp),
+        "fp": float(fp),
+        "tn": float(tn),
+        "fn": float(fn),
+    }
+
+
+def _calibration_metrics(y_true: np.ndarray, y_score: np.ndarray) -> dict[str, float]:
+    return {
+        "ece": metric_ece(y_true.astype(int), y_score.astype(float)),
+        "brier": metric_brier(y_true.astype(int), y_score.astype(float)),
+    }
+
+
+def _write_summary_md(path: Path, metrics: dict[str, Any]) -> None:
+    stress = metrics.get("stress_analysis", {})
+    normal = stress.get("normal", {})
+    dist = stress.get("distributed_truth", {})
+
+    lines = ["# Evaluation Summary", ""]
+    lines.append("## Headline")
+    lines.append("")
+    lines.append(
+        f"- ROC-AUC: {float(metrics.get('roc_auc', 0.0) or 0.0):.4f}  "
+        f"PR-AUC: {float(metrics.get('pr_auc', 0.0) or 0.0):.4f}"
+    )
+    lines.append(
+        f"- Calibration ({metrics.get('calibration', {}).get('method', 'none')}): "
+        f"ECE={float(metrics.get('ece', 0.0) or 0.0):.4f}, "
+        f"Brier={float(metrics.get('brier', 0.0) or 0.0):.4f}"
+    )
+
+    lines.append("")
+    lines.append("## Distributed-truth stress analysis")
+    lines.append("")
+    if normal and dist:
+        lines.append(
+            f"- Normal subset FPR={float(normal.get('fpr', 0.0)):.4f}, "
+            f"Distributed-truth FPR={float(dist.get('fpr', 0.0)):.4f}."
+        )
+        lines.append(
+            "- 误报来源解释：distributed-truth 样本的真实证据通常分散在多个训练项上，"
+            "导致单峰度下降、entropy 上升，阈值/线性分类器更易把其误判为 hallucination。"
+        )
+    else:
+        lines.append("- 当前评估集没有可分辨的 distributed_truth 子集或样本不足。")
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     args = parse_args()
     frame = pd.read_csv(args.features_path)
@@ -124,13 +203,115 @@ def main() -> None:
     args.test_predictions_path.parent.mkdir(parents=True, exist_ok=True)
     test_frame.to_csv(args.test_predictions_path, index=False)
 
-    metrics = compute_metrics_bundle(
+    # Pre-calibration metrics on test split.
+    metrics_pre = compute_metrics_bundle(
         y_true=test_frame["label_int"].to_numpy(dtype=int),
         y_score=test_frame["groundedness_score"].to_numpy(dtype=float),
         y_pred=test_frame["predicted_label"].to_numpy(dtype=int),
         abstain_flags=test_frame["abstain_flag"].to_numpy(dtype=bool),
         decision_threshold=float(args.decision_threshold),
     )
+
+    # Optional calibration (fit on train split, apply to test split).
+    calibration_method = str(args.calibration)
+    calibrated_test_scores = test_frame["groundedness_score"].to_numpy(dtype=float)
+    if calibration_method != "none":
+        calibrated_test_scores = calibrate_scores(
+            train_scores=train_frame["groundedness_score"].to_numpy(dtype=float),
+            train_labels=train_frame["label_int"].to_numpy(dtype=int),
+            target_scores=calibrated_test_scores,
+            method=calibration_method,
+            random_state=int(split_payload.get("seed", 42)),
+        )
+
+    calibrated_test_pred = (calibrated_test_scores >= args.decision_threshold).astype(int)
+    calibrated_test_pred = np.where(
+        test_frame["abstain_flag"].to_numpy(dtype=bool),
+        0,
+        calibrated_test_pred,
+    )
+
+    metrics = compute_metrics_bundle(
+        y_true=test_frame["label_int"].to_numpy(dtype=int),
+        y_score=calibrated_test_scores,
+        y_pred=calibrated_test_pred.astype(int),
+        abstain_flags=test_frame["abstain_flag"].to_numpy(dtype=bool),
+        decision_threshold=float(args.decision_threshold),
+    )
+
+    # Keep both pre and post calibration summaries.
+    pre_calib_scalar = _calibration_metrics(
+        y_true=test_frame["label_int"].to_numpy(dtype=int),
+        y_score=test_frame["groundedness_score"].to_numpy(dtype=float),
+    )
+    post_calib_scalar = _calibration_metrics(
+        y_true=test_frame["label_int"].to_numpy(dtype=int),
+        y_score=calibrated_test_scores,
+    )
+
+    metrics["calibration"] = {
+        "method": calibration_method,
+        "pre": pre_calib_scalar,
+        "post": post_calib_scalar,
+        "curves_pre": metrics_pre.get("curves", {}).get("calibration", []),
+        "curves_post": metrics.get("curves", {}).get("calibration", []),
+    }
+
+    # Update test frame with post-calibration predictions for plots and stress analysis.
+    test_frame["groundedness_score"] = calibrated_test_scores
+    test_frame["predicted_label"] = calibrated_test_pred.astype(int)
+
+    # Bootstrap CIs on post-calibration test scores.
+    y_true_test = test_frame["label_int"].to_numpy(dtype=int)
+    y_score_test = test_frame["groundedness_score"].to_numpy(dtype=float)
+    metrics["roc_auc_ci"] = bootstrap_ci(
+        metric_roc_auc,
+        y_true_test,
+        y_score_test,
+        n=int(args.ci_bootstrap_n),
+        seed=int(args.ci_seed),
+    )
+    metrics["pr_auc_ci"] = bootstrap_ci(
+        metric_pr_auc,
+        y_true_test,
+        y_score_test,
+        n=int(args.ci_bootstrap_n),
+        seed=int(args.ci_seed) + 1,
+    )
+    metrics["ece_ci"] = bootstrap_ci(
+        lambda yt, ys: metric_ece(yt, ys),
+        y_true_test,
+        y_score_test,
+        n=int(args.ci_bootstrap_n),
+        seed=int(args.ci_seed) + 2,
+    )
+    metrics["brier_ci"] = bootstrap_ci(
+        metric_brier,
+        y_true_test,
+        y_score_test,
+        n=int(args.ci_bootstrap_n),
+        seed=int(args.ci_seed) + 3,
+    )
+
+    # Stress subset analysis: distributed_truth vs normal (if attribution_mode exists).
+    if "attribution_mode" in test_frame.columns:
+        distributed_mask = test_frame["attribution_mode"].astype(str).eq("distributed")
+        normal_mask = ~distributed_mask
+    else:
+        distributed_mask = np.zeros(test_frame.shape[0], dtype=bool)
+        normal_mask = np.ones(test_frame.shape[0], dtype=bool)
+
+    stress_payload: dict[str, Any] = {}
+    if np.any(normal_mask):
+        normal_true = test_frame.loc[normal_mask, "label_int"].to_numpy(dtype=int)
+        normal_pred = test_frame.loc[normal_mask, "predicted_label"].to_numpy(dtype=int)
+        stress_payload["normal"] = _subset_breakdown(normal_true, normal_pred)
+    if np.any(distributed_mask):
+        dist_true = test_frame.loc[distributed_mask, "label_int"].to_numpy(dtype=int)
+        dist_pred = test_frame.loc[distributed_mask, "predicted_label"].to_numpy(dtype=int)
+        stress_payload["distributed_truth"] = _subset_breakdown(dist_true, dist_pred)
+    metrics["stress_analysis"] = stress_payload
+
     metrics["thresholds"] = {
         "decision_threshold": float(args.decision_threshold),
         "score_threshold": float(args.score_threshold),
@@ -153,6 +334,7 @@ def main() -> None:
     args.metrics_path.write_text(
         json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    _write_summary_md(args.summary_md_path, metrics)
 
 
 if __name__ == "__main__":

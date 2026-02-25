@@ -37,7 +37,10 @@ dev = [
 ]
 trak = ["torch>=2.2.0"]
 cea = []
-dda = []
+dda = [
+  "sentence-transformers>=3.0.1",
+  "torch>=2.2.0",
+]
 
 [project.scripts]
 ads = "ads.cli:app"

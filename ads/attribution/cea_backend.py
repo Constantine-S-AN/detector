@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from ads.attribution.base import AttributionBackend, AttributionItem
 
@@ -17,8 +18,17 @@ class CEABackend(AttributionBackend):
         self._train_corpus_path = Path(train_corpus_path)
         self._seed = seed
 
-    def compute(self, prompt: str, answer: str, top_k: int) -> list[AttributionItem]:
+    def compute(
+        self,
+        prompt: str,
+        answer: str,
+        top_k: int,
+        *,
+        sample_meta: dict[str, Any] | None = None,
+        attribution_mode: str | None = None,
+    ) -> list[AttributionItem]:
         """Compute influences with CEA if user wires a local implementation."""
+        del prompt, answer, top_k, sample_meta, attribution_mode
         raise NotImplementedError(
             "TODO: CEA backend is optional; provide implementation and dependencies locally."
         )

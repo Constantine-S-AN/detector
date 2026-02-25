@@ -58,7 +58,9 @@ class TopInfluentialItem(BaseModel):
 
     train_id: str
     score: float
+    rank: int
     text: str
+    source: str = ""
     meta: dict[str, str | int | float | bool] = Field(default_factory=dict)
 
 
