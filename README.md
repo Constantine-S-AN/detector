@@ -34,7 +34,7 @@ make build-site
 
 Pipeline:
 
-1. Attribution backend（toy / trak / cea / dda）
+1. Attribution backend（toy / trak / cea / dda_tfidf_proxy / dda_real，兼容 `dda` alias）
 2. Density features（entropy/top-share/gini/effective_k）
 3. Detector（threshold + logistic）
 4. Evaluation & plots（ROC/PR/Calibration/abstain/hist）
@@ -161,6 +161,14 @@ bash scripts/demo_end_to_end.sh
 7. `write_run_manifest.py`
 8. `ads.report.build_report`
 
+`scripts/build_features.py` 现在兼容三类 attribution schema（自动识别）：
+
+1. wrapper + `items`（新 schema）
+2. items-only（整行 list，或仅含 `items`）
+3. legacy `attribution`（历史兼容）
+
+并且会在 `features.csv` 保留 `attribution_mode` 列（优先级：record 字段 > meta 回填 > `unknown`）。
+
 ## API Example
 
 ```bash
@@ -172,6 +180,8 @@ curl -X POST http://127.0.0.1:8000/scan \
     "method": "logistic",
     "backend": "toy",
     "allow_fallback": false,
+    "redact": true,
+    "redaction_snippet_chars": 96,
     "top_k": 20,
     "decision_threshold": 0.50,
     "score_threshold": 0.55,
@@ -180,12 +190,14 @@ curl -X POST http://127.0.0.1:8000/scan \
 ```
 
 `/scan` 默认是 strict 模式（`allow_fallback=false`）：当请求 `logistic` 且模型缺失时返回 `400`（`code=MODEL_MISSING`），不会 silent fallback。若需要 API best-effort 行为，可显式传 `allow_fallback=true`。
+`/scan` 默认开启 redaction（`redact=true`），`top_influential.text` 返回 snippet，完整文本不出现在 API 响应中；响应会显式包含 `evidence_summary` 与 `redaction` 字段。
 
 ## Optional Backends
 
 - `ads/attribution/trak_backend.py`
 - `ads/attribution/cea_backend.py`
 - `ads/attribution/dda_backend.py` (experimental)
+- API/CLI backend 参数支持：`dda_tfidf_proxy`、`dda_real`，以及兼容 alias `dda`（映射到 `dda_tfidf_proxy`）。
 
 这些插件是 best-effort 适配，不阻塞 `make demo`。
 
