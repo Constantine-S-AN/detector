@@ -189,6 +189,9 @@ curl -X POST http://127.0.0.1:8000/scan \
 
 这些插件是 best-effort 适配，不阻塞 `make demo`。
 
+> Note: `toy` backend 仅用于 sanity check / CI 演示，不应作为研究结论依据。
+> toy 分布形态由 `attribution_mode`（数据字段/请求参数）驱动，而不是答案文本措辞。
+
 ## Reproducibility Notes
 
 - 固定随机种子（默认 `42`）

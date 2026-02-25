@@ -50,7 +50,19 @@ def _iter_output_rows(args: argparse.Namespace) -> Iterator[dict[str, object]]:
     for row in iter_jsonl(args.dataset_path):
         prompt = str(row["prompt"])
         answer = str(row["answer"])
-        attribution = backend.compute(prompt=prompt, answer=answer, top_k=args.top_k)
+        row_meta: dict[str, object] = {
+            "sample_id": row.get("sample_id"),
+            "label": row.get("label"),
+            "attribution_mode": row.get("attribution_mode"),
+        }
+        requested_mode = row.get("attribution_mode")
+        attribution = backend.compute(
+            prompt=prompt,
+            answer=answer,
+            top_k=args.top_k,
+            sample_meta=row_meta,
+            attribution_mode=str(requested_mode) if requested_mode is not None else None,
+        )
         yield {
             "sample_id": row["sample_id"],
             "prompt": prompt,
