@@ -40,6 +40,22 @@ Pipeline:
 4. Evaluation & plots（ROC/PR/Calibration/abstain/hist）
 5. Static export for portfolio and GitHub Pages
 
+## Density features definitions
+
+- **H@K (top-K influence entropy)**
+  - 先对 influence scores 降序排序并截断到 top-K。
+  - 默认 `weight_mode="shifted"`：`s'_i = (s_i - min(topK)) + eps`，再归一化 `p_i = s'_i / Σ s'_j`。
+  - 计算 `H@K = -Σ_i p_i log p_i`（自然对数）。
+  - 默认主指标使用归一化版本：`H@K_norm = H@K / log(k_effective)`（`k_effective=min(K,n)`）。
+
+- **Peakiness ratios（双版本）**
+  - `peakiness_ratio_score = top1_score / sum_top5_score`（主结果默认使用该版本，也保持 `peakiness_ratio` 向后兼容别名）。
+  - `peakiness_ratio_prob = p1 / sum_top5_p`（其中 `p` 使用 softmax(topK scores) 生成，用作对照）。
+
+- **Defaults**
+  - 默认 `K=20`（可通过 `scripts/build_features.py --h-k` 调整，支持逗号分隔多 K）。
+  - 默认 `weight_mode="shifted"`，`eps=1e-12`。
+
 ## Proposal-Focused Demo Visuals
 
 ![Proposal Overview](docs/images/proposal-overview.png)
@@ -111,6 +127,23 @@ make build-site   # next static build
 make serve-api    # run FastAPI for FULL mode
 ```
 
+## Development & Testing
+
+- 依赖管理使用 `pyproject.toml`（PEP 621）+ optional extras。
+- 安装开发/测试依赖：
+
+```bash
+pip install -e .[dev]
+```
+
+- 运行全量测试：
+
+```bash
+PYTHONPATH=. pytest -q
+```
+
+说明：API 测试依赖 `httpx`（已包含在 `[project.optional-dependencies].dev`），若环境缺失会在 `tests/test_api.py` 自动 skip。
+
 ## End-to-End Script
 
 ```bash
@@ -155,6 +188,9 @@ curl -X POST http://127.0.0.1:8000/scan \
 - `ads/attribution/dda_backend.py` (experimental)
 
 这些插件是 best-effort 适配，不阻塞 `make demo`。
+
+> Note: `toy` backend 仅用于 sanity check / CI 演示，不应作为研究结论依据。
+> toy 分布形态由 `attribution_mode`（数据字段/请求参数）驱动，而不是答案文本措辞。
 
 ## Reproducibility Notes
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from ads.attribution.base import AttributionBackend, AttributionItem
 
@@ -22,8 +23,17 @@ class TRAKBackend(AttributionBackend):
         except Exception as exc:  # pragma: no cover - optional dependency
             self._import_error = exc
 
-    def compute(self, prompt: str, answer: str, top_k: int) -> list[AttributionItem]:
+    def compute(
+        self,
+        prompt: str,
+        answer: str,
+        top_k: int,
+        *,
+        sample_meta: dict[str, Any] | None = None,
+        attribution_mode: str | None = None,
+    ) -> list[AttributionItem]:
         """Compute influence scores via TRAK integration (not implemented by default)."""
+        del sample_meta, attribution_mode
         if self._import_error is not None:
             raise RuntimeError(
                 "TRAK backend dependencies are missing. Install extras with `pip install .[trak]`"

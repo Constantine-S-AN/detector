@@ -27,5 +27,13 @@ class AttributionBackend(ABC):
     name: str = "base"
 
     @abstractmethod
-    def compute(self, prompt: str, answer: str, top_k: int) -> list[AttributionItem]:
+    def compute(
+        self,
+        prompt: str,
+        answer: str,
+        top_k: int,
+        *,
+        sample_meta: dict[str, Any] | None = None,
+        attribution_mode: str | None = None,
+    ) -> list[AttributionItem]:
         """Compute top-k training influences for a prompt/answer pair."""
