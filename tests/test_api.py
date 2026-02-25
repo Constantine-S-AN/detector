@@ -19,7 +19,15 @@ def _write_train_corpus(base_dir: Path) -> None:
     corpus_dir = base_dir / "artifacts" / "data"
     corpus_dir.mkdir(parents=True, exist_ok=True)
     rows = [
-        {"train_id": f"train-{index}", "text": f"reference text {index}"} for index in range(50)
+        {
+            "train_id": f"train-{index}",
+            "text": (
+                f"reference text {index} "
+                + ("alpha beta gamma " * 20)
+                + f"tail-{index}-secret"
+            ),
+        }
+        for index in range(50)
     ]
     (corpus_dir / "train_corpus.jsonl").write_text(
         "\n".join(json.dumps(row, ensure_ascii=False) for row in rows) + "\n",
@@ -60,7 +68,14 @@ def test_scan_and_cache_clear_endpoints(tmp_path: Path, monkeypatch) -> None:
     assert payload["prediction"]["groundedness_score"] >= 0.0
     assert len(payload["top_influential"]) == 12
     first_item = payload["top_influential"][0]
-    assert set(first_item.keys()) == {"train_id", "score", "text", "meta"}
+    assert set(first_item.keys()) == {"train_id", "score", "text", "text_hash", "meta"}
+    assert payload["evidence_summary"]["item_count"] == 12
+    assert len(payload["evidence_summary"]["highlights"]) > 0
+    assert payload["redaction"]["enabled"] is True
+    assert payload["redaction"]["full_text_included"] is False
+    assert isinstance(first_item["text_hash"], str)
+    assert first_item["text_hash"] != ""
+    assert "tail-" not in first_item["text"]
     assert payload["thresholds"]["score_threshold"] == 0.61
     assert payload["thresholds"]["max_score_floor"] == 0.03
 
@@ -128,3 +143,35 @@ def test_scan_logistic_missing_can_fallback_when_enabled(tmp_path: Path, monkeyp
     assert payload["requested_detector"] == "logistic"
     assert payload["detector"] == "threshold"
     assert payload["fallback_reason"]
+
+
+def test_scan_backend_enum_includes_new_dda_variants() -> None:
+    client = TestClient(app)
+    response = client.get("/openapi.json")
+    assert response.status_code == 200
+    payload = response.json()
+    backend_enum = set(
+        payload["components"]["schemas"]["ScanRequest"]["properties"]["backend"]["enum"]
+    )
+    assert {"dda_tfidf_proxy", "dda_real", "dda"} <= backend_enum
+
+
+def test_scan_accepts_new_dda_backend_names(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    _write_train_corpus(tmp_path)
+    clear_runtime_caches()
+    client = TestClient(app)
+
+    request_payload = {
+        "prompt": "Give one grounded fact about Tokyo.",
+        "answer": "According to sources, Tokyo is in Japan.",
+        "method": "threshold",
+        "top_k": 10,
+    }
+
+    for backend_name in ("dda_tfidf_proxy", "dda_real", "dda"):
+        response = client.post("/scan", json={**request_payload, "backend": backend_name})
+        assert response.status_code != 422
+        assert response.status_code == 400
+        body = response.json()
+        assert body["code"] == "BACKEND_UNAVAILABLE"

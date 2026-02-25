@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+from ads.attribution import BackendInputName
 from ads.service import clear_runtime_caches, scan_sample
 
 app = FastAPI(title="Attribution Density Scanner API", version="0.1.0")
@@ -29,11 +30,13 @@ class ScanRequest(BaseModel):
     answer: str
     method: Literal["threshold", "logistic"] = "logistic"
     top_k: int = Field(default=20, ge=1, le=200)
-    backend: Literal["toy", "trak", "cea", "dda"] = "toy"
+    backend: BackendInputName = "toy"
     allow_fallback: bool = False
     decision_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
     score_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
     max_score_floor: float = Field(default=0.05, ge=0.0, le=5.0)
+    redact: bool = True
+    redaction_snippet_chars: int = Field(default=96, ge=8, le=512)
 
 
 class PredictionPayload(BaseModel):
@@ -59,7 +62,37 @@ class TopInfluentialItem(BaseModel):
     train_id: str
     score: float
     text: str
+    text_hash: str | None = None
     meta: dict[str, str | int | float | bool] = Field(default_factory=dict)
+
+
+class EvidenceHighlightPayload(BaseModel):
+    """High-level evidence highlight entry."""
+
+    train_id: str
+    score: float
+    score_share: float
+    snippet: str
+    text_hash: str
+
+
+class EvidenceSummaryPayload(BaseModel):
+    """Aggregated evidence summary for explainability."""
+
+    item_count: int
+    top1_share: float
+    top5_share: float
+    top10_share: float
+    highlights: list[EvidenceHighlightPayload] = Field(default_factory=list)
+
+
+class RedactionPayload(BaseModel):
+    """Redaction metadata for top influential texts."""
+
+    enabled: bool
+    snippet_chars: int
+    hash_algorithm: Literal["sha256"] = "sha256"
+    full_text_included: bool
 
 
 class ScanResponse(BaseModel):
@@ -74,6 +107,8 @@ class ScanResponse(BaseModel):
     prediction: PredictionPayload
     thresholds: ThresholdsPayload
     top_influential: list[TopInfluentialItem]
+    evidence_summary: EvidenceSummaryPayload
+    redaction: RedactionPayload
 
 
 @app.get("/health")
@@ -103,6 +138,18 @@ def handle_value_error(_: Request, exc: ValueError) -> JSONResponse:
     )
 
 
+@app.exception_handler(NotImplementedError)
+def handle_not_implemented(_: Request, exc: NotImplementedError) -> JSONResponse:
+    """Translate backend capability gaps into readable 4xx payloads."""
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": str(exc),
+            "code": "BACKEND_UNAVAILABLE",
+        },
+    )
+
+
 @app.post("/scan", response_model=ScanResponse)
 def scan(payload: ScanRequest) -> ScanResponse:
     """Run ADS scan for one prompt/answer pair."""
@@ -116,5 +163,7 @@ def scan(payload: ScanRequest) -> ScanResponse:
         decision_threshold=payload.decision_threshold,
         score_threshold=payload.score_threshold,
         max_score_floor=payload.max_score_floor,
+        redact=payload.redact,
+        redaction_snippet_chars=payload.redaction_snippet_chars,
     )
     return ScanResponse(**result)

@@ -8,6 +8,7 @@ from typing import Annotated, Literal
 
 import typer
 
+from ads.attribution import BackendInputName
 from ads.report.build_report import build_report_index
 from ads.service import scan_sample
 
@@ -20,7 +21,7 @@ def scan(
     answer: Annotated[str, typer.Option(help="Model answer")],
     top_k: Annotated[int, typer.Option(help="Number of top influential samples")] = 20,
     backend: Annotated[
-        Literal["toy", "trak", "cea", "dda"],
+        BackendInputName,
         typer.Option(help="Attribution backend"),
     ] = "toy",
     train_corpus_path: Annotated[
@@ -47,6 +48,14 @@ def scan(
         float,
         typer.Option(help="Abstain floor for max attribution score"),
     ] = 0.05,
+    redact: Annotated[
+        bool,
+        typer.Option(help="Enable evidence text redaction (snippet/hash only)"),
+    ] = True,
+    redaction_snippet_chars: Annotated[
+        int,
+        typer.Option(help="Maximum snippet characters when redaction is enabled"),
+    ] = 96,
     seed: Annotated[int, typer.Option(help="Random seed")] = 42,
 ) -> None:
     """Run a single scan and print JSON output."""
@@ -62,6 +71,8 @@ def scan(
         decision_threshold=decision_threshold,
         score_threshold=score_threshold,
         max_score_floor=max_score_floor,
+        redact=redact,
+        redaction_snippet_chars=redaction_snippet_chars,
     )
     typer.echo(json.dumps(result, ensure_ascii=False, indent=2))
 

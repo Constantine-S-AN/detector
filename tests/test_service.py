@@ -35,7 +35,10 @@ def test_scan_sample_threshold_mode(tmp_path: Path) -> None:
     assert "features" in result
     assert "prediction" in result
     assert "thresholds" in result
+    assert "evidence_summary" in result
+    assert "redaction" in result
     assert len(result["top_influential"]) == 10
+    assert result["redaction"]["enabled"] is True
     assert result["requested_detector"] == "threshold"
     assert result["detector"] == "threshold"
     assert result["fallback_reason"] is None
