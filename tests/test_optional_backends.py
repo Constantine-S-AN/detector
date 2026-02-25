@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from ads.attribution import create_backend
+from ads.attribution import canonicalize_backend_name, create_backend
 from ads.attribution.cea_backend import CEABackend
 from ads.attribution.dda_backend import DDABackend
 from ads.attribution.trak_backend import TRAKBackend
@@ -40,3 +40,32 @@ def test_create_backend_rejects_unknown_name() -> None:
             "not-a-backend",
             train_corpus_path="artifacts/data/train_corpus.jsonl",
         )
+
+
+def test_create_backend_accepts_new_dda_variants_and_alias() -> None:
+    tfidf_backend = create_backend(
+        "dda_tfidf_proxy",
+        train_corpus_path="artifacts/data/train_corpus.jsonl",
+    )
+    real_backend = create_backend(
+        "dda_real",
+        train_corpus_path="artifacts/data/train_corpus.jsonl",
+    )
+    with pytest.warns(DeprecationWarning):
+        aliased_backend = create_backend(
+            "dda",
+            train_corpus_path="artifacts/data/train_corpus.jsonl",
+        )
+
+    assert isinstance(tfidf_backend, DDABackend)
+    assert isinstance(real_backend, DDABackend)
+    assert isinstance(aliased_backend, DDABackend)
+    assert tfidf_backend.variant == "tfidf_proxy"
+    assert real_backend.variant == "real"
+    assert aliased_backend.variant == "tfidf_proxy"
+
+
+def test_backend_alias_resolution_for_dda() -> None:
+    with pytest.warns(DeprecationWarning):
+        resolved = canonicalize_backend_name("dda")
+    assert resolved == "dda_tfidf_proxy"

@@ -95,6 +95,44 @@ def _compute_single_feature_ablation(
     return rows
 
 
+def _normalize_mode_bucket(value: object) -> str:
+    normalized = str(value).strip().lower()
+    if normalized in {"distributed", "distributed_truth"}:
+        return "distributed_truth"
+    return "normal"
+
+
+def build_stress_analysis(frame: pd.DataFrame) -> dict[str, dict[str, float | int | None]]:
+    """Summarize prediction behavior by attribution mode buckets."""
+    if frame.empty:
+        return {}
+
+    if "attribution_mode" in frame.columns:
+        mode_series = frame["attribution_mode"].fillna("unknown").astype(str)
+    else:
+        mode_series = pd.Series(["unknown"] * len(frame), index=frame.index, dtype="object")
+
+    enriched_frame = frame.copy()
+    enriched_frame["mode_bucket"] = mode_series.map(_normalize_mode_bucket)
+
+    result: dict[str, dict[str, float | int | None]] = {}
+    for bucket_name, bucket_frame in enriched_frame.groupby("mode_bucket"):
+        y_true = bucket_frame["label_int"].to_numpy(dtype=int)
+        y_score = bucket_frame["groundedness_score"].to_numpy(dtype=float)
+        y_pred = bucket_frame["predicted_label"].to_numpy(dtype=int)
+        coverage = 1.0 - float(bucket_frame["abstain_flag"].astype(bool).mean())
+        accuracy = float((y_true == y_pred).mean())
+        result[str(bucket_name)] = {
+            "count": int(len(bucket_frame)),
+            "coverage": float(coverage),
+            "accuracy": accuracy,
+            "mean_score": float(bucket_frame["groundedness_score"].mean()),
+            "roc_auc": _safe_binary_auc(y_true, y_score),
+            "pr_auc": _safe_binary_pr_auc(y_true, y_score),
+        }
+    return result
+
+
 def main() -> None:
     args = parse_args()
     frame = pd.read_csv(args.features_path)
@@ -146,6 +184,7 @@ def main() -> None:
         test_frame=test_frame,
         seed=int(split_payload.get("seed", 42)),
     )
+    metrics["stress_analysis"] = build_stress_analysis(test_frame)
     args.ablation_path.parent.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(metrics["ablation"]).to_csv(args.ablation_path, index=False)
 
